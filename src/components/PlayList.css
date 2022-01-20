@@ -1,0 +1,40 @@
+#titlePlaylist {
+    position: fixed;
+    top: 30%;
+    left: 14.5%;
+    font-size: 35px;
+    color:khaki;
+  }
+
+.playlistsongs{
+        position: absolute;
+        left: 20px;
+        top: 80px;
+        height: 500px;
+        width: 500px;
+        overflow-x: hidden;
+}
+
+.playlistsongs::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0);
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 10px;
+  }
+  
+  .playlistsongs::-webkit-scrollbar {
+    width: 8px;
+    background-color: rgba(0, 0, 0, 0);
+  }
+  
+  .playlistsongs::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0);
+    background-image: -webkit-gradient(
+      linear,
+      20% 12%,
+      75% 84%,
+      from(#fa684e),
+      to(#b18f50),
+      color-stop(0.6, #c04912)
+    );
+  }

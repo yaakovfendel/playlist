@@ -8,12 +8,8 @@
     font-family:cursive;
     margin: 0;
     padding: 0;
-    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwL0_LECqWP5nmWfmq8FogSm1xznIYak4M6A&usqp=CAU");
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    
+    background-image:  url("C:\Users\USER\.vscode\extensions\yaakovfull\playlist\src\images\2154868.jpg");
+    background-repeat: no-repeat;    
   }
   
   .App{
@@ -21,8 +17,7 @@
     flex-direction: column;
     margin: 3px auto;
     overflow: auto;
-    min-height: 300px;
-    border: 1px solid steelblue;
+    border: none;
     padding: 30px;
     border-radius: 5px;
   }
@@ -31,16 +26,15 @@
   
   .btn{
     display: inline-block;
-    background: #000;
-  color: #fff;
+    background: rgb(228, 143, 143);
+  color: rgb(255, 255, 255);
   border: none;
-  padding: 10px 20px;
+  padding: 10px 10px;
   margin: 5px;
-  border-radius: 5px;
+  border-radius: 15px;
   cursor: pointer;
   text-decoration: none;
   font-size: 15px;
-  font-family: inherit;
   }
   
   .btn:focus{
@@ -55,36 +49,43 @@
     
   }
   .AddItemForm{
-    /* position:absolute;
-    top:60px;
-    left:550px; */
-    left:50%
+    position:absolute;
+    top:7%;
+    left:30%
   }
   .Login{
+    position:absolute;
     display: flex;
-    left:50%;
-    /* position:absolute; */
-    /* top:70px; */
-    /* left:1100px; */
+    top:8%;
+    left:2%;
   }
-  
-  
   
   .PlayList{
     position:absolute;
-    top:250px;
-    left:100px;
+    top:23%;
+    left:6%;
 }
 .FindSongs{
   position:absolute;
+  width: 500px;
+  height: 50px;
   top:230px;
-  left:1300px;
+  left:970px;
 }
 .ReactPlayer{
   position:absolute;
-  top:280px;
-  left:630px;
+  top:45%;
+  left:40%;
 }
+
+.SelectCategory{
+  background-color: darkseagreen;
+  position:absolute;
+  top:7%;
+  left:70%;
+}
+
+
   
 
   

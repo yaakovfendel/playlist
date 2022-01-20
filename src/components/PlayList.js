@@ -7,7 +7,8 @@ export default function PlayList({
   Delete_a_task_from_the_list,
 }) {
   return (
-    <div>
+    <div className="playlistsongs">
+      <div id="titlePlaylist">Play list</div>
       {songlist.map(({ id, duration, thumbnails, title, type, url, views }) => (
         <Play
           key={id}
@@ -16,6 +17,7 @@ export default function PlayList({
           title={title}
           thumbnails={thumbnails}
           Delete_a_task_from_the_list={Delete_a_task_from_the_list}
+          // user={user}
         />
       ))}
     </div>

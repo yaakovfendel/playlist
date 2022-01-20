@@ -1,16 +1,9 @@
 .form-control  {
-    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXXvuEXx4cbCNZ1J9JAuPzERjBKSeWkpdkfQ&usqp=CAU");
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
     margin: 5px;
     border-radius: 45px;
     padding: 10px 20px;
     overflow: auto;
     border: 1px solid steelblue;
-    width: 100%;
     font-size: 17px;
-        max-width: 400px;
     }
     

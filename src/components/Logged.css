@@ -1,0 +1,15 @@
+.logintitleloggedin{
+    position: fixed;
+    top: 1%;
+    right: 18%;
+    font-size: 35px;
+    color:rgb(173, 132, 19);
+}
+.form-control-loggedin{
+margin: 8px;
+border-radius: 25px;
+padding: 5px 12px;
+overflow: auto;
+font-size: 17px;
+
+}

@@ -1,3 +1,4 @@
+import "./Header.css";
 export default function Header() {
-  return <div>play list</div>;
+  return <div className="titleHeader">My play list</div>;
 }

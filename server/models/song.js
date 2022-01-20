@@ -7,13 +7,14 @@ const songSchema = new mongoose.Schema({
   views: { type: String, required: true },
   type: { type: String, required: true },
   url: { type: String, required: true },
-  user: { type: String, required: false },
+  // user: { type: Array, required: false },
   uploadedAt: { type: String },
   playlist: { type: Array, require: false },
   createdBy: {
-    type: mongoose.SchemaTypes.ObjectId,
+    // type: mongoose.SchemaTypes.ObjectId,
+    type: String,
     ref: "User",
-    // required: true,
+    required: true,
   },
   provider: { type: String },
 });

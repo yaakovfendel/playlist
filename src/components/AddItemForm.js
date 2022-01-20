@@ -11,17 +11,16 @@ export default function AddItemForm({
   const val = useRef();
   return (
     <div>
-      <h3> SONG</h3>
       <input
         ref={val}
         type="text"
         className="form-control "
-        placeholder="add song to play list"
+        placeholder="find a song"
         value={newsong}
         onChange={(e) => filterPlaylist(e.target.value)}
       />
       <button className="btn" onClick={() => search(val.current.value)}>
-        find song
+        🔎
       </button>
       <button className="btn" onClick={() => allsongs()}>
         all songs

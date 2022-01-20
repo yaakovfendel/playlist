@@ -1,0 +1,41 @@
+#titleList {
+    position: fixed;
+    top: 27%;
+    right: 28%;
+    font-size: 35px;
+    color: aquamarine;
+  }
+  
+  .findsongs {
+    position: absolute;
+    right: -150px;
+    top: 80px;
+    height: 500px;
+    width: 500px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
+  
+  .findsongs::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 10px;
+  }
+  
+  .findsongs::-webkit-scrollbar {
+    width: 5px;
+    background-color: rgba(0, 0, 0, 0);
+  }
+  
+  .findsongs::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0);
+    background-image: -webkit-gradient(
+      linear,
+      40% 0%,
+      75% 84%,
+      from(#fa684e),
+      to(#f5b7ad),
+      color-stop(0.6, #f58677)
+    );
+  }

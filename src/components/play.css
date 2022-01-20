@@ -1,20 +1,75 @@
 
 .containerPlay{
     display: flex;
-    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXXvuEXx4cbCNZ1J9JAuPzERjBKSeWkpdkfQ&usqp=CAU");
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    margin: 5px;
-    border-radius: 45px;
-    padding: 10px 20px;
+       margin: 0.5px;
+    padding: 2px 2px;
     overflow: auto;
-    border: 1px solid steelblue;
-    width: 400px;
-    /* max-height: 300px; */
+    border: none;
+    overflow: hidden;
 }
-.img{
-    width: 100px;
-    height: 100px;
+
+.totalImageSelector {   
+    display: flex;
+    background-color: rgba(100, 32, 32, 0);
+    border: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    padding-top: 5px;
+    padding-bottom: 5px;
   }
+  
+  #addVideo {
+    background-color: rgba(255, 255, 255, 0);
+    border: none;
+    cursor: pointer;
+    margin-left: 23px;
+    margin-top: 15px;
+    height: 55px;
+    width: 45px;
+    padding-top: 4.5px;
+    border-radius: 100px;  
+    color: aquamarine;
+  }
+  #addVideo:hover {
+    color: #fff;
+    cursor: pointer;
+    text-align: center;
+    border: none;
+    background-image: linear-gradient(
+      to right,
+      #c29f86,
+      #da8f8f,
+      #dab394,
+      #be816e
+    );
+  }
+  
+  #addVideo:focus {
+    outline: none;
+  }
+  
+  .songsImg {
+    border-radius: 100px;
+    height: 40px;
+    width: 40px;
+  }
+  #playVideo {
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0);
+    border: none;
+  }
+  
+  .button{
+      background: none;
+      border: none;
+  }
+  .delete{
+      
+  }
+  .title{
+      padding-left: 30px;
+  }
+  .songandimg{
+display: flex;
+flex: content; 
+}

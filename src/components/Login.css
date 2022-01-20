@@ -1,0 +1,15 @@
+.logintitle{
+        position: fixed;
+        top: 1%;
+        left: 6%;
+        font-size: 35px;
+        color:lightseagreen;
+}
+.form-control-login{
+    margin: 8px;
+    border-radius: 25px;
+    padding: 5px 12px;
+    overflow: auto;
+    font-size: 17px;
+    
+}
