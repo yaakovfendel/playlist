@@ -41,13 +41,13 @@
   #addVideofoundsong:hover {
    
     border: none;
-    background-image: linear-gradient(
+    /* background-image: linear-gradient(
       to right,
       #c9c616,
       #92bb20,
       #5ad442,
       #459b1d81
-    );
+    ); */
   }
   
   #addVideofoundsong:focus {
@@ -62,9 +62,9 @@
   }
   
 .img{
-    width: 40px;
-    height: 40px;
-    border-radius: 100px;
+    width: 240px;
+    height: 200px;
+    border-radius: 45px;
   }
 
   .button{

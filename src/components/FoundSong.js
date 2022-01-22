@@ -12,24 +12,27 @@ export default function FoundSong({ song }) {
 
   return (
     <div className="containerFoundSong">
-      <div id="addVideofoundsong">
-        <button className="button" onClick={() => playhttp(song.url)}>
-          <img className="img" src={song.thumbnails[0].url} alt="" />;
-        </button>
-        <h4>{song.title}</h4>
-      </div>
       {User && (
         <button
-          className="button"
+          className="button "
+          id="addVideofoundsong"
           onClick={() => {
             song.user = User;
             console.log(song);
             Add_a_song_to_the_list(song);
+            playhttp(song.url);
           }}
         >
-          ➕
+          <img className="img " src={song.thumbnails[0].url} alt="" />;
         </button>
       )}
     </div>
   );
 }
+
+// ➕
+
+// <div id="addVideofoundsong">
+//   <button className="button" onClick={() => playhttp(song.url)}></button>
+//   <h4>{song.title}</h4>
+// </div>
