@@ -1,6 +1,6 @@
 
 .containerFoundSong{
-    display: flex;
+    /* display: flex; */
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -13,7 +13,7 @@
 }
 
 .totalImageSelector {
-    display: flex;
+    /* display: flex; */
     background-color: rgba(100, 32, 32, 0);
     border: none;
     font-family: Arial, Helvetica, sans-serif;
@@ -23,7 +23,7 @@
   }
   
   #addVideofoundsong {
-      display: flex;
+      /* display: flex; */
     background-color: rgba(255, 255, 255, 0);
     border: none;
     cursor: pointer;

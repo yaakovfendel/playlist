@@ -5,7 +5,12 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const jwt = require("jsonwebtoken");
 const { connectDB } = require("./models/modelsIndex.js");
-const { songsRoute, usersRoute, apiRoute } = require("./routes/router.js");
+const {
+  songsRoute,
+  usersRoute,
+  apiRoute,
+  categoriesRoute,
+} = require("./routes/router.js");
 
 //Uses
 const app = express();
@@ -14,6 +19,7 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 //Use routes
+app.use("/categories", categoriesRoute);
 app.use("/songs", songsRoute);
 app.use("/users", usersRoute);
 app.use("/api", apiRoute);

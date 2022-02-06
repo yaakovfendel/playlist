@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Song = require("../models/Song");
+const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 
 const authJWT = (req, res, next) => {
@@ -21,26 +22,27 @@ const authJWT = (req, res, next) => {
   }
 };
 
-router.post("/", authJWT, async (req, res) => {
-  // console.log(req.body);
-  // console.log("id", req.body.id);
-  // console.log("req.body.createdBy", req.body.createdBy);
+router.post("/newsong", authJWT, async (req, res) => {
   let song = await Song.findOne({
     id: req.body.id,
     createdBy: req.body.createdBy,
   });
   if (!song) {
     let newSong = await new Song({ ...req.body }).save();
-
     res.send(newSong);
   } else {
     res.send(false);
   }
 });
 
-router.get("/", async (req, res) => {
-  let songsList = await Song.find({});
-  res.send(songsList);
+router.post("/", async (req, res) => {
+  console.log("body", req.body);
+  let userid = await User.findOne({ username: req.body.username });
+  if (userid) {
+    const usersongsList = await Song.find({ createdBy: userid._id });
+    const songsList = await Song.find({});
+    res.send([usersongsList, songsList]);
+  }
 });
 
 router.delete("/", authJWT, async (req, res) => {
@@ -48,7 +50,6 @@ router.delete("/", authJWT, async (req, res) => {
     id: req.body,
     createdBy: req.body.createdBy,
   });
-  console.log("song", song);
   if (song) {
     const deletedSong = await Song.deleteOne({
       id: req.body,

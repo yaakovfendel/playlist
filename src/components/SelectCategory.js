@@ -6,7 +6,7 @@ import FormControl from "@mui/material/FormControl";
 import ListItemText from "@mui/material/ListItemText";
 import Select from "@mui/material/Select";
 import Checkbox from "@mui/material/Checkbox";
-
+import "./SelectCategory.css";
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -18,16 +18,22 @@ const MenuProps = {
   },
 };
 
-const names = ["shiry neshama", "shirim hasidim"];
+const names = [
+  "all",
+  "Shirei Neshama",
+  "Shirim Chassidim",
+  "Shirim Yisraeli'm",
+  "new",
+];
 
 export default function SelectCategory() {
-  const [personName, setPersonName] = React.useState([]);
+  const [songCategory, setsongCategory] = React.useState([]);
 
   const handleChange = (event) => {
     const {
       target: { value },
     } = event;
-    setPersonName(
+    setsongCategory(
       // On autofill we get a stringified value.
       typeof value === "string" ? value.split(",") : value
     );
@@ -35,13 +41,13 @@ export default function SelectCategory() {
 
   return (
     <div>
-      <FormControl sx={{ m: 1, width: 300 }}>
+      <FormControl sx={{ m: 6, width: 300 }}>
         <InputLabel id="demo-multiple-checkbox-label">Tag</InputLabel>
         <Select
           labelId="demo-multiple-checkbox-label"
           id="demo-multiple-checkbox"
           multiple
-          value={personName}
+          value={songCategory}
           onChange={handleChange}
           input={<OutlinedInput label="Tag" />}
           renderValue={(selected) => selected.join(", ")}
@@ -49,7 +55,7 @@ export default function SelectCategory() {
         >
           {names.map((name) => (
             <MenuItem key={name} value={name}>
-              <Checkbox checked={personName.indexOf(name) > -1} />
+              <Checkbox checked={songCategory.indexOf(name) > -1} />
               <ListItemText primary={name} />
             </MenuItem>
           ))}

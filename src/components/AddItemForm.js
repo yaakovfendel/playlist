@@ -7,6 +7,7 @@ export default function AddItemForm({
   search,
   filterPlaylist,
   allsongs,
+  mysongs,
 }) {
   const val = useRef();
   return (
@@ -21,6 +22,9 @@ export default function AddItemForm({
       />
       <button className="btn" onClick={() => search(val.current.value)}>
         🔎
+      </button>
+      <button className="btn" onClick={() => mysongs()}>
+        mysongs
       </button>
       <button className="btn" onClick={() => allsongs()}>
         all songs

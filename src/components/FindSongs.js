@@ -1,19 +1,23 @@
+import { useState } from "react";
 import "./FindSongs.css";
 import FoundSong from "./FoundSong";
+import SelectCategory from "./SelectCategory";
 export default function FindSongs({ songFind }) {
+  const [newSong, setnewSong] = useState(false);
+
   return (
-    <div className="findsongs">
+    <div>
       <div id="titleList">list of songs</div>
-      {songFind.map(
-        (song, index) =>
-          song.type === "video" && <FoundSong key={song.items} song={song} />
-      )}
+      <div className="findsongs">
+        {songFind.map(
+          (song, index) =>
+            song.type === "video" && (
+              <FoundSong key={song.items} song={song} setnewSong={setnewSong} />
+            )
+        )}
+      </div>
     </div>
   );
 }
 
-// {songFind.map(
-//   (song, index) =>
-//     index < 3 &&
-//     song.type === "video" && <FoundSong key={song.items} song={song} />
-// )}
+// {newSong && <SelectCategory></SelectCategory>}

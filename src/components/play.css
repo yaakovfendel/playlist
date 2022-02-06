@@ -1,14 +1,14 @@
 
-.containerPlay{
+/* .containerPlay{
     display: flex;
        margin: 0.5px;
     padding: 2px 2px;
     overflow: auto;
     border: none;
     overflow: hidden;
-}
+} */
 
-.totalImageSelector {   
+/* .totalImageSelector {   
     display: flex;
     background-color: rgba(100, 32, 32, 0);
     border: none;
@@ -16,25 +16,26 @@
     font-size: 12px;
     padding-top: 5px;
     padding-bottom: 5px;
-  }
+  } */
   
   #addVideo {
-    background-color: rgba(255, 255, 255, 0);
-    border: none;
+    /* background-color: rgba(255, 255, 255, 0); */
+    /* border: none; */
+    /* margin-left: 23px; */
+    /* margin-top: 15px; */
+    /* height: 55px; */
+    /* width: 45px; */
+    /* border-color:1px blanchedalmond;   */
     cursor: pointer;
-    margin-left: 23px;
-    margin-top: 15px;
-    height: 55px;
-    width: 45px;
-    padding-top: 4.5px;
-    border-radius: 100px;  
-    color: aquamarine;
+    color:#fff;
+    padding-top: 2.5px;
   }
   #addVideo:hover {
     color: #fff;
     cursor: pointer;
     text-align: center;
-    border: none;
+    border: 1rem;
+    border: #fff;
     background-image: linear-gradient(
       to right,
       #c29f86,
@@ -50,8 +51,8 @@
   
   .songsImg {
     border-radius: 100px;
-    height: 40px;
-    width: 40px;
+    height: 50px;
+    width: 50px;
   }
   #playVideo {
     cursor: pointer;
@@ -64,7 +65,7 @@
       border: none;
   }
   .delete{
-      
+    color: #fff;  
   }
   .title{
       padding-left: 30px;

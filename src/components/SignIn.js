@@ -14,6 +14,7 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link as Linkof } from "react-router-dom";
 import { useParams, useNavigate } from "react-router-dom";
+import "./SignIn.css";
 
 function Copyright(props) {
   return (
@@ -24,9 +25,7 @@ function Copyright(props) {
       {...props}
     >
       {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{" "}
+      <Linkof to={`/Home`}>"go to home page"</Linkof>
       {new Date().getFullYear()}
       {"."}
     </Typography>
@@ -83,13 +82,14 @@ export default function SignIn({
 
     setUserPassword("");
   };
+
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
+      <Container component="main" maxWidth="xs" className="signin">
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 8,
+            marginTop: 18,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
@@ -134,7 +134,7 @@ export default function SignIn({
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 2, mb: 3 }}
             >
               Sign In
             </Button>
@@ -146,9 +146,7 @@ export default function SignIn({
               </Grid>
               <Grid item>
                 <Link href="#" variant="body2">
-                  <Linkof to={`/Signup`}>
-                    "Don't have an account? Sign Up"
-                  </Linkof>
+                  <Linkof to={`/`}>"Don't have an account? Sign Up"</Linkof>
                 </Link>
               </Grid>
             </Grid>

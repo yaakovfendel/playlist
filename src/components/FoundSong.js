@@ -1,14 +1,14 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import SongContext from "../Context/SongContext";
 import "./FoundSong.css";
+import SelectCategory from "./SelectCategory";
 
-export default function FoundSong({ song }) {
-  // console.log(song);
-  // console.log(song.thumbnails[0].url);
+export default function FoundSong({ song, setnewSong }) {
   const { Add_a_song_to_the_list } = useContext(SongContext);
   const { playhttp } = useContext(SongContext);
   const { User } = useContext(SongContext);
-  // console.log(User);
+  const { setCategory } = useContext(SongContext);
+  const { category } = useContext(SongContext);
 
   return (
     <div className="containerFoundSong">
@@ -18,9 +18,9 @@ export default function FoundSong({ song }) {
           id="addVideofoundsong"
           onClick={() => {
             song.user = User;
-            console.log(song);
-            Add_a_song_to_the_list(song);
+            Add_a_song_to_the_list(song, category);
             playhttp(song.url);
+            setnewSong(true);
           }}
         >
           <img className="img " src={song.thumbnails[0].url} alt="" />;
@@ -29,10 +29,3 @@ export default function FoundSong({ song }) {
     </div>
   );
 }
-
-// ➕
-
-// <div id="addVideofoundsong">
-//   <button className="button" onClick={() => playhttp(song.url)}></button>
-//   <h4>{song.title}</h4>
-// </div>

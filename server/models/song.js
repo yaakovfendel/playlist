@@ -7,9 +7,9 @@ const songSchema = new mongoose.Schema({
   views: { type: String, required: true },
   type: { type: String, required: true },
   url: { type: String, required: true },
-  // user: { type: Array, required: false },
+  category: { type: String, required: true },
   uploadedAt: { type: String },
-  playlist: { type: Array, require: false },
+  // playlist: { type: Array, require: false },
   createdBy: {
     // type: mongoose.SchemaTypes.ObjectId,
     type: String,

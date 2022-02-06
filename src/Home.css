@@ -8,8 +8,11 @@
     font-family:cursive;
     margin: 0;
     padding: 0;
-    background-image:  url("C:\Users\USER\.vscode\extensions\yaakovfull\playlist\src\images\2154868.jpg");
+    background-image: url("https://media.istockphoto.com/vectors/abstract-creative-concept-vector-background-for-web-and-mobile-vector-id1066981260?k=20&m=1066981260&s=612x612&w=0&h=K6XTfJN9CMMVsfSlE33NTKdaB4JyUjl2JQF43KkxFT8=");
+    /* background-color:black; */
+    background-size: cover;
     background-repeat: no-repeat;    
+ height: 100 vh;
   }
   
   .App{
@@ -63,14 +66,14 @@
   .PlayList{
     position:absolute;
     top:23%;
-    left:6%;
+    left:7%;
 }
 .FindSongs{
   position:absolute;
   width: 500px;
   height: 50px;
-  top:230px;
-  left:970px;
+  top:23%;
+  left:60%;
 }
 .ReactPlayer{
   position:absolute;
@@ -83,6 +86,18 @@
   position:absolute;
   top:7%;
   left:70%;
+}
+
+#titlePlaylist {
+  /* position: fixed; */
+  font-size: 35px;
+  color:goldenrod;
+}
+
+#titleList {
+  /* position: fixed; */
+  font-size: 35px;
+  color: aquamarine;
 }
 
 
