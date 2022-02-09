@@ -7,33 +7,34 @@ import ListItemText from "@mui/material/ListItemText";
 import Select from "@mui/material/Select";
 import Checkbox from "@mui/material/Checkbox";
 import "./SelectCategory.css";
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
+import SongContext from "../Context/SongContext";
+
+const ITEM_HEIGHT = 20;
+const ITEM_PADDING_TOP = 5;
 const MenuProps = {
   PaperProps: {
     style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
+      maxHeight: ITEM_HEIGHT * 9 + ITEM_PADDING_TOP,
+      width: 200,
     },
   },
 };
 
-const names = [
-  "all",
-  "Shirei Neshama",
-  "Shirim Chassidim",
-  "Shirim Yisraeli'm",
-  "new",
-];
-
 export default function SelectCategory() {
-  const [songCategory, setsongCategory] = React.useState([]);
+  const { Playlist } = React.useContext(SongContext);
+  const { setsongplaylist } = React.useContext(SongContext);
+  const { songplaylist } = React.useContext(SongContext);
 
+  const names = Playlist?.map((Playlist) => {
+    return Playlist;
+  });
   const handleChange = (event) => {
+    console.log(event);
     const {
       target: { value },
     } = event;
-    setsongCategory(
+    console.log(value);
+    setsongplaylist(
       // On autofill we get a stringified value.
       typeof value === "string" ? value.split(",") : value
     );
@@ -41,21 +42,21 @@ export default function SelectCategory() {
 
   return (
     <div>
-      <FormControl sx={{ m: 6, width: 300 }}>
-        <InputLabel id="demo-multiple-checkbox-label">Tag</InputLabel>
+      <FormControl sx={{ m: 1, width: 200 }}>
+        <InputLabel id="demo-multiple-checkbox-label">PLAY LIST</InputLabel>
         <Select
           labelId="demo-multiple-checkbox-label"
           id="demo-multiple-checkbox"
           multiple
-          value={songCategory}
+          value={songplaylist}
           onChange={handleChange}
-          input={<OutlinedInput label="Tag" />}
+          input={<OutlinedInput label="PLAY LIST" />}
           renderValue={(selected) => selected.join(", ")}
           MenuProps={MenuProps}
         >
           {names.map((name) => (
-            <MenuItem key={name} value={name}>
-              <Checkbox checked={songCategory.indexOf(name) > -1} />
+            <MenuItem key={name} value={name} target={name}>
+              <Checkbox checked={songplaylist.indexOf(name) > -1} />
               <ListItemText primary={name} />
             </MenuItem>
           ))}

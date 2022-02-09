@@ -1,12 +1,12 @@
 
-/* .containerPlay{
+.containerPlay{
     display: flex;
        margin: 0.5px;
     padding: 2px 2px;
     overflow: auto;
     border: none;
     overflow: hidden;
-} */
+}
 
 /* .totalImageSelector {   
     display: flex;
@@ -27,15 +27,15 @@
     /* width: 45px; */
     /* border-color:1px blanchedalmond;   */
     cursor: pointer;
-    color:#fff;
+    /* color:#fff; */
     padding-top: 2.5px;
   }
   #addVideo:hover {
     color: #fff;
     cursor: pointer;
-    text-align: center;
-    border: 1rem;
-    border: #fff;
+    /* text-align: center; */
+    /* border: 1rem; */
+    /* border: #fff; */
     background-image: linear-gradient(
       to right,
       #c29f86,
@@ -50,13 +50,13 @@
   }
   
   .songsImg {
-    border-radius: 100px;
-    height: 50px;
-    width: 50px;
+    border-radius: 40px;
+    height: 70px;
+    width: 80px;
   }
   #playVideo {
     cursor: pointer;
-    background-color: rgba(255, 255, 255, 0);
+    /* background-color: rgba(255, 255, 255, 0); */
     border: none;
   }
   
@@ -65,7 +65,7 @@
       border: none;
   }
   .delete{
-    color: #fff;  
+    color:red;  
   }
   .title{
       padding-left: 30px;

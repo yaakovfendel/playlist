@@ -15,7 +15,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link as Linkof } from "react-router-dom";
 import Home from "../Home";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./Signup.css";
 function Copyright(props) {
   return (
@@ -73,13 +73,12 @@ export default function SignUp({
     })
       .then((res) => res.json())
       .then((data) => {
-        const accessToken = data;
-        localStorage.accessToken = JSON.stringify(accessToken.accessToken);
-        JSON.parse(localStorage.accessToken);
-        data.accessToken
+        const { accessToken } = data;
+        localStorage.accessToken = JSON.stringify(accessToken);
+        accessToken
           ? setUser([firstname, localStorage.accessToken])
           : setUser(false);
-        if (User) {
+        if (localStorage.accessToken) {
           navigate("/Home");
         }
       });

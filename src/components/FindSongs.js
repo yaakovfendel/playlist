@@ -7,7 +7,6 @@ export default function FindSongs({ songFind }) {
 
   return (
     <div>
-      <div id="titleList">list of songs</div>
       <div className="findsongs">
         {songFind.map(
           (song, index) =>
@@ -21,3 +20,5 @@ export default function FindSongs({ songFind }) {
 }
 
 // {newSong && <SelectCategory></SelectCategory>}
+
+// <div id="titleList">list of songs</div>

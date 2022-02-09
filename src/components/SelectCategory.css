@@ -1,3 +1,20 @@
 #demo-multiple-checkbox{
-    background-color:mediumvioletred;
+    background-color:azure;
 }
+
+.css-1poimk-MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper {
+    width: 9px;
+  }
+  
+  .css-1poimk-MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper {
+    border-radius: 10%;
+    background-color: rgba(0, 0, 0, 0);
+    background-image: -webkit-gradient(
+      linear,
+      27% 15%,
+      75% 74%,
+      from(#fa684e),
+      to(#b18f50),
+      color-stop(0.6, #c04912)
+    );
+  }

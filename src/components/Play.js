@@ -8,10 +8,12 @@ export default function Play({
   url,
   title,
   thumbnails,
-  Delete_a_task_from_the_list,
+  Delete_a_song_from_the_list,
+  _id,
 }) {
   const { playhttp } = useContext(SongContext);
   const { setVideocall } = useContext(SongContext);
+  const { category } = useContext(SongContext);
   const { videocall } = useContext(SongContext);
   const { User } = useContext(SongContext);
   return (
@@ -20,18 +22,18 @@ export default function Play({
         <button
           className="button"
           id="playVideo"
-          onClick={() => playhttp(id)(setVideocall(!videocall))}
+          onClick={() => playhttp(id)(setVideocall(true))}
         >
-          <img className="songsImg " id={id} src={thumbnails} alt="" />
+          <img className="songsImg " id={id} src={thumbnails[0]?.url} alt="" />
         </button>
         <h4 className="title">{title}</h4>
       </div>
       {User && (
         <button
           className="button delete"
-          onClick={() => Delete_a_task_from_the_list(id)}
+          onClick={() => Delete_a_song_from_the_list(_id)}
         >
-          <DeleteIcon></DeleteIcon>
+          <DeleteIcon> </DeleteIcon>
         </button>
       )}
     </div>

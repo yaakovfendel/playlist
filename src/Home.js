@@ -1,145 +1,107 @@
-import AddItemForm from "./components/AddItemForm";
+import "./Home.css";
+import "plyr-react/dist/plyr.css";
+import { useEffect, useState } from "react";
 import Header from "./components/Header";
 import PlayList from "./components/PlayList";
-import "./Home.css";
-import { useEffect, useState } from "react";
 import FindSongs from "./components/FindSongs";
 import SongContext from "./Context/SongContext";
-import Login from "./components/Login";
 import Plyr from "plyr-react";
-import "plyr-react/dist/plyr.css";
-import Logged from "./components/Logged";
-import SelectCategory from "./components/SelectCategory";
-import { useNavigate } from "react-router-dom";
-import CustomizedSelects from "./components/CustomizedSelects";
 import axios from "axios";
-
+import Sidebar from "./components/sidebar";
 
 function Home({ User, setUser, userPassword, setUserPassword }) {
-  const [songlist, setSonglist] = useState([]);
-  const [usersSongs, setusersSongs] = useState([]);
-  const [category, setCategory] = useState("All");
-  const [categoris, setCategoris] = useState([]);
-
-  useEffect(() => {
-    async function get_all_songs_from_mongo() {
-      const res = await fetch(`http://localhost:3001/songs`, {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-          authorization: `bearer ${JSON.parse(localStorage.accessToken)}`,
-        },
-        body: JSON.stringify({ username: User[0] }),
-      });
-      const data = await res.json();
-      // if (!User) {
-      setsongToUser(data[0]);
-      setSonglist(data[1]);
-      setusersSongs(data[0]);
-      // } else {
-      //   setsongToUser(data.filter((song) => song.user[0] == User[0]));
-      // }
-    }
-
-    const get_all_categoris = async () => {
-      const res = await axios.get(`http://localhost:3001/categories`);
-      const data = await res.data;
-      console.log(data);
-      setCategoris(data);
-    };
-    get_all_categoris();
-    get_all_songs_from_mongo();
-  }, []);
-
-  const [songToUser, setsongToUser] = useState(songlist);
+  const headers = {
+    headers: {
+      "content-type": "application/json",
+      authorization: `bearer ${JSON.parse(localStorage.accessToken)}`,
+    },
+  };
+  const [category, setCategory] = useState([]);
+  const [Playlist, setPlaylist] = useState([]);
+  const [allPlaylist, setAllPlaylist] = useState([]);
+  const [songToUser, setsongToUser] = useState([]);
   const [songFind, setsongFind] = useState([]);
   const [newsong, setNewsong] = useState("");
   const [http, setHttp] = useState("");
   const [videocall, setVideocall] = useState(null);
+  const [songplaylist, setsongplaylist] = useState([]);
 
   useEffect(() => {
-    setsongToUser(
-      usersSongs.filter((song) =>
-        category !== "All" ? song.category === category : usersSongs
-      )
-    );
-  }, [category, usersSongs]);
-
-  const Add_a_song_to_the_list = (song, category) => {
-    console.log(category);
-
-    const fullsong = {
-      id: song.id,
-      duration: song.duration,
-      thumbnails: song.thumbnails[0].url,
-      title: song.title,
-      type: song.type,
-      url: song.url,
-      views: song.views,
-      category: category,
+    const get_all_user_playlist = async () => {
+      const res = await axios.get(
+        `http://localhost:3001/playlists/userPlaylists`,
+        headers
+      );
+      const data = await res.data;
+      setAllPlaylist(data);
+      setPlaylist(data.map((playlist) => playlist.PlaylistName));
+      setCategory(data[0]?.PlaylistName);
+      setsongToUser(data[0]?.songs);
     };
-    add_song_to_mongo(fullsong);
-  };
+    get_all_user_playlist();
+  }, [newsong, Playlist]);
 
-  function add_category_to_mongo(category) {
-    fetch(`http://localhost:3001/categories/newcategory`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        authorization: `bearer ${JSON.parse(localStorage.accessToken)}`,
-      },
-      body: JSON.stringify([category]),
-    }).then((res) =>
-      res.json().then((data) => {
-        console.log(data);
-      })
+  useEffect(() => {
+    // const get_playlist = async (category) => {
+    //   const res = await axios.get(
+    //     `http://localhost:3001//playlist/${category}`,
+    //     headers
+    //   );
+    //   const data = await res.data;
+    //   setAllPlaylist(data);
+    //   setPlaylist(data.map((playlist) => playlist.PlaylistName));
+    //   setCategory(data[0]?.PlaylistName);
+    //   setsongToUser(data[0]?.songs);
+    // };
+    // get_playlist(category);
+    const playlistChosen = allPlaylist.filter(
+      (playlist) => playlist.PlaylistName === category
     );
-  }
-  function add_song_to_mongo(song) {
-    fetch(`http://localhost:3001/songs/newsong`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        authorization: `bearer ${JSON.parse(localStorage.accessToken)}`,
-      },
-      body: JSON.stringify(song),
-    }).then((res) =>
-      res.json().then((data) => {
-        if (data) {
-          console.log(data);
-          setSonglist([...songlist, data]);
-          setsongToUser([...songToUser, data]);
-          setusersSongs([...usersSongs, data]);
-          setsongFind([]);
-        }
-      })
+    setsongToUser(playlistChosen[0]?.songs);
+  }, [category]);
+
+  async function add_playlist_to_mongo(playlist) {
+    const playlistName = { playlistName: playlist };
+    const res = await axios.post(
+      "http://localhost:3001/playlists",
+      playlistName,
+      headers
     );
+    const data = await res.data;
+    const playlistnames = data.map((playlist) => playlist);
+    setPlaylist(playlistnames);
   }
 
-  const allsongs = () => {
-    setsongToUser(songlist);
-  };
-  function Delete_a_song_from_the_list(id) {
-    fetch(`http://localhost:3001/songs`, {
-      method: "DELETE",
-      headers: {
-        "content-type": "application/json",
-        authorization: `bearer ${JSON.parse(localStorage.accessToken)}`,
-      },
-      body: JSON.stringify([id]),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data) {
-          setSonglist(data);
-          // setsongToUser(data);
-          setsongToUser(songToUser.filter((song) => song.id !== id));
-          setusersSongs(usersSongs.filter((song) => song.id !== id));
-        } else {
-          console.log(data);
-        }
-      });
+  async function add_song_to_playlist(song, playlistName) {
+    const res = await axios.put(
+      `http://localhost:3001/playlists`,
+      { playlistName, song },
+      headers
+    );
+    const data = await res.data;
+    setNewsong(false);
+
+    // setsongToUser(data[0].songs);
   }
+
+  async function Delete_a_song_from_the_list(song_id) {
+    const playlistName = category;
+    const res = await axios.put(
+      `http://localhost:3001/playlists/delete`,
+
+      {
+        playlistName,
+        song_id,
+      },
+      headers
+    );
+    const data = await res.data;
+    setsongToUser(data[0]?.songs);
+    setNewsong(newsong);
+  }
+
+  // const allsongs = () => {};
+  // const mysongs = () => {};
 
   const playhttp = (id) => {
     setHttp({
@@ -153,117 +115,56 @@ function Home({ User, setUser, userPassword, setUserPassword }) {
     });
   };
 
-
-
-  const navigate = useNavigate();
-
-  const register = (userName, userPassword) => {
-    navigate("/");
-  };
-  const login = (userName, userPassword) => {
-    navigate("/Signin");
-  };
   const logout = () => {
     localStorage.accessToken = null;
     setUser(false);
   };
 
-  const mysongs = () => {
-    setsongToUser(usersSongs);
-  };
-
-  async function get_all_users_from_mongo() {
-    const res = await fetch(`http://localhost:3001/users`, {
-      method: "GET",
-    });
-    const data = await res.json();
-    console.log(data);
-    setUserPassword("");
-  }
-
   const search = async (search) => {
     const res = await fetch(`http://localhost:3001/api/search/${search}`);
     const data = await res.json();
-    console.log(data);
     setsongFind(data);
-    setNewsong("");
   };
 
-  const filterPlaylist = (search) => {
-    setNewsong(search);
-    console.log(search);
-    if (search) {
-      setsongToUser(
-        songToUser.filter((v) =>
-          v.title.toLocaleLowerCase().includes(search.toLocaleLowerCase())
-        )
-      );
-    } else {
-      setsongToUser(usersSongs);
-    }
-  };
   return (
-    <div className="App">
-      <Header />
-
-      <div className="SelectCategory"></div>
+    <div>
       <SongContext.Provider
         value={{
-          Add_a_song_to_the_list: Add_a_song_to_the_list,
+          setNewsong: setNewsong,
+          add_song_to_playlist: add_song_to_playlist,
           playhttp: playhttp,
-          User: User,
-          videocall: videocall,
           setVideocall: setVideocall,
           setCategory: setCategory,
+          User: User,
           category: category,
-          categoris: categoris,
-          setCategoris: setCategoris,
-          add_category_to_mongo: add_category_to_mongo,
+          videocall: videocall,
+          Playlist: Playlist,
+          songplaylist: songplaylist,
+          setPlaylist: setPlaylist,
+          add_playlist_to_mongo: add_playlist_to_mongo,
+          setsongplaylist: setsongplaylist,
+          setsongToUser: setsongToUser,
+          logout: logout,
+          search: search,
         }}
       >
-        <div className="form">
-          <div className="AddItemForm">
-            <AddItemForm
-              mysongs={mysongs}
-              allsongs={allsongs}
-              search={search}
-              setNewsong={setNewsong}
-              newsong={newsong}
-              filterPlaylist={filterPlaylist}
-              Add_a_song_to_the_list={Add_a_song_to_the_list}
-            />
-            <CustomizedSelects />
-          </div>
-          <div className="Login">
-            {!User && (
-              <Login
-                get_all_users_from_mongo={get_all_users_from_mongo}
-                register={register}
-                login={login}
-                User={User}
-                userPassword={userPassword}
-                setUserPassword={setUserPassword}
-              />
-            )}
-          </div>
-          <div className="Login">
-            {User && <Logged logout={logout} User={User} />}
-          </div>
-          {videocall && (
-            <div className="ReactPlayer">
-              <Plyr source={http} />
-            </div>
-          )}
-        </div>
+        <Sidebar />
+        <Header />
+
+        <div className="SelectCategory"></div>
+        <div className="form"></div>
         <div className="PlayList">
           <PlayList
             playhttp={playhttp}
-            songlist={songToUser}
-            Delete_a_task_from_the_list={Delete_a_song_from_the_list}
+            songToUser={songToUser}
+            Delete_a_song_from_the_list={Delete_a_song_from_the_list}
           />
         </div>
         <div className="FindSongs">
           <FindSongs songFind={songFind} />
+        </div>
+        <div className="ReactPlayer">
+          <Plyr source={http} />
         </div>
       </SongContext.Provider>
     </div>
@@ -271,3 +172,85 @@ function Home({ User, setUser, userPassword, setUserPassword }) {
 }
 
 export default Home;
+// <div className="Login">
+// {!User && (
+//   <Login
+//     get_all_users_from_mongo={get_all_users_from_mongo}
+//     register={register}
+//     login={login}
+//     User={User}
+//     userPassword={userPassword}
+//     setUserPassword={setUserPassword}
+//   />
+// )}
+// </div>
+// <div className="Login">
+// {User && <Logged logout={logout} User={User} />}
+// </div>
+
+// <div className="AddItemForm">
+//   <AddItemForm
+//     mysongs={mysongs}
+//     allsongs={allsongs}
+//     search={search}
+//     setNewsong={setNewsong}
+//     newsong={newsong}
+//     filterPlaylist={filterPlaylist}
+//     Add_a_song_to_the_list={Add_a_song_to_the_list}
+//   />
+// </div>
+// function add_song_to_mongo(song) {
+//   fetch(`http://localhost:3001/songs/newsong`, {
+//     method: "POST",
+//     headers: {
+//       "content-type": "application/json",
+//       authorization: `bearer ${JSON.parse(localStorage.accessToken)}`,
+//     },
+//     body: JSON.stringify(song),
+//   }).then((res) =>
+//     res.json().then((data) => {
+//       if (data) {
+//       }
+//     })
+//   );
+// }
+// const register = (userName, userPassword) => {
+//   navigate("/");
+// };
+// const login = (userName, userPassword) => {
+//   navigate("/Signin");
+// };
+// const Add_a_song_to_the_list = (song, category) => {
+//   const fullsong = {
+//     id: song.id,
+//     duration: song.duration,
+//     thumbnails: song.thumbnails[0].url,
+//     title: song.title,
+//     type: song.type,
+//     url: song.url,
+//     views: song.views,
+//     category: category,
+//   };
+//   add_song_to_mongo(fullsong);
+// };
+
+// const filterPlaylist = (search) => {
+//   setNewsong(search);
+//   if (search) {
+//     // setsongToUser(
+//     //   songToUser.filter((v) =>
+//     //     v.title.toLocaleLowerCase().includes(search.toLocaleLowerCase())
+//     //   )
+//     // );
+//   } else {
+//     // setsongToUser(usersSongs);
+//   }
+// };
+
+// async function get_all_users_from_mongo() {
+//   const res = await fetch(`http://localhost:3001/users`, {
+//     method: "GET",
+//   });
+//   const data = await res.json();
+//   setUserPassword("");
+// }

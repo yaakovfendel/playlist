@@ -1,111 +1,100 @@
 *{
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-  
-  body{
-    font-family:cursive;
-    margin: 0;
-    padding: 0;
-    background-image: url("https://media.istockphoto.com/vectors/abstract-creative-concept-vector-background-for-web-and-mobile-vector-id1066981260?k=20&m=1066981260&s=612x612&w=0&h=K6XTfJN9CMMVsfSlE33NTKdaB4JyUjl2JQF43KkxFT8=");
-    /* background-color:black; */
-    background-size: cover;
-    background-repeat: no-repeat;    
- height: 100 vh;
-  }
-  
-  .App{
-    display: flex;
-    flex-direction: column;
-    margin: 3px auto;
-    overflow: auto;
-    border: none;
-    padding: 30px;
-    border-radius: 5px;
-  }
-  
-  
-  
-  .btn{
-    display: inline-block;
-    background: rgb(228, 143, 143);
-  color: rgb(255, 255, 255);
+  /* box-sizing: border-box; */
+  /* margin: 0;
+  padding: 0; */
+
+}
+
+body{
+  font-family:cursive;
+  margin: 0;
+  padding: 0;
+  background-color: beige;
+  /* background-image:  url("C:\Users\USER\.vscode\extensions\yaakovfull\playlist\src\images\2154868.jpg"); */
+  background-image:  url("C:\Users\USER\yaakovfull\projecs\playlist\src\images\2154868.jpg");
+  background-repeat: no-repeat; 
+  height: 100vh;   
+}
+
+.App{
+  display: flex;
+  flex-direction: column;
+  margin: 3px auto;
+  overflow: auto;
   border: none;
-  padding: 10px 10px;
-  margin: 5px;
-  border-radius: 15px;
-  cursor: pointer;
-  text-decoration: none;
-  font-size: 15px;
-  }
+  padding: 30px;
+  border-radius: 5px;
+  height: 100vh;   
+}
+
+
+
+.btn{
+  display: inline-block;
+  background: rgb(228, 143, 143);
+color: rgb(255, 255, 255);
+border: none;
+/* padding: 10px 10px; */
+margin: 5px;
+border-radius: 15px;
+cursor: pointer;
+text-decoration: none;
+font-size: 15px;
+}
+
+.btn:focus{
+  outline: none;
+}
+
+.btn:active{
+  transform: scale(0.98);
+}
+.form{
+  display: flex
   
-  .btn:focus{
-    outline: none;
-  }
-  
-  .btn:active{
-    transform: scale(0.98);
-  }
-  .form{
-    display: flex
-    
-  }
-  .AddItemForm{
-    position:absolute;
-    top:7%;
-    left:30%
-  }
-  .Login{
-    position:absolute;
-    display: flex;
-    top:8%;
-    left:2%;
-  }
-  
-  .PlayList{
-    position:absolute;
-    top:23%;
-    left:7%;
+}
+.AddItemForm{
+  position:absolute;
+  top:7%;
+  left:30%
+}
+.Login{
+  position:absolute;
+  display: flex;
+  top:8%;
+  left:2%;
+}
+
+.PlayList{
+  position:absolute;
+  top:23%;
+  left:6%;
 }
 .FindSongs{
-  position:absolute;
-  width: 500px;
-  height: 50px;
-  top:23%;
-  left:60%;
+position:absolute;
+width: 500px;
+height: 50px;
+top:230px;
+left:970px;
 }
 .ReactPlayer{
-  position:absolute;
-  top:45%;
-  left:40%;
+position:absolute;
+top:10%;
+left:30%;
 }
 
 .SelectCategory{
-  background-color: darkseagreen;
-  position:absolute;
-  top:7%;
-  left:70%;
-}
-
-#titlePlaylist {
-  /* position: fixed; */
-  font-size: 35px;
-  color:goldenrod;
-}
-
-#titleList {
-  /* position: fixed; */
-  font-size: 35px;
-  color: aquamarine;
+background-color: darkseagreen;
+position:absolute;
+top:7%;
+left:70%;
 }
 
 
-  
 
-  
-  
 
-  
-  
-  
+
+
+
+
+

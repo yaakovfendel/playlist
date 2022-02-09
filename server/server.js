@@ -4,12 +4,14 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const jwt = require("jsonwebtoken");
+const authJWT = require("./Controlers/authJWT");
 const { connectDB } = require("./models/modelsIndex.js");
 const {
   songsRoute,
   usersRoute,
   apiRoute,
   categoriesRoute,
+  playlistsRoute,
 } = require("./routes/router.js");
 
 //Uses
@@ -22,6 +24,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use("/categories", categoriesRoute);
 app.use("/songs", songsRoute);
 app.use("/users", usersRoute);
+app.use("/playlists", authJWT, playlistsRoute);
 app.use("/api", apiRoute);
 
 //Connect the Database

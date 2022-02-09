@@ -75,7 +75,7 @@ export default function SignIn({
         data.accessToken
           ? setUser([firstname, localStorage.accessToken])
           : setUser(false);
-        if (User) {
+        if (localStorage.accessToken) {
           navigate("/Home");
         }
       });
