@@ -39,25 +39,22 @@ function Home({ User, setUser, userPassword, setUserPassword }) {
       setsongToUser(data[0]?.songs);
     };
     get_all_user_playlist();
-  }, [newsong, Playlist]);
+  }, []);
 
   useEffect(() => {
-    // const get_playlist = async (category) => {
-    //   const res = await axios.get(
-    //     `http://localhost:3001//playlist/${category}`,
-    //     headers
-    //   );
-    //   const data = await res.data;
-    //   setAllPlaylist(data);
-    //   setPlaylist(data.map((playlist) => playlist.PlaylistName));
-    //   setCategory(data[0]?.PlaylistName);
-    //   setsongToUser(data[0]?.songs);
-    // };
-    // get_playlist(category);
-    const playlistChosen = allPlaylist.filter(
-      (playlist) => playlist.PlaylistName === category
-    );
-    setsongToUser(playlistChosen[0]?.songs);
+    const get_all_user_playlist = async () => {
+      const res = await axios.get(
+        `http://localhost:3001/playlists/userPlaylists`,
+        headers
+      );
+      const data = await res.data;
+      setAllPlaylist(data);
+      const playlistChosen = allPlaylist.filter(
+        (playlist) => playlist.PlaylistName === category
+      );
+      setsongToUser(playlistChosen[0]?.songs);
+    };
+    get_all_user_playlist();
   }, [category]);
 
   async function add_playlist_to_mongo(playlist) {
@@ -68,20 +65,23 @@ function Home({ User, setUser, userPassword, setUserPassword }) {
       headers
     );
     const data = await res.data;
-    const playlistnames = data.map((playlist) => playlist);
+    const playlistnames = data.map((playlist) => playlist.PlaylistName);
     setPlaylist(playlistnames);
   }
 
-  async function add_song_to_playlist(song, playlistName) {
+  async function add_song_to_playlist(song) {
+    const playlistName = category;
+    console.log(playlistName);
     const res = await axios.put(
       `http://localhost:3001/playlists`,
       { playlistName, song },
       headers
     );
-    const data = await res.data;
-    setNewsong(false);
 
-    // setsongToUser(data[0].songs);
+    const data = await res.data;
+    setCategory(category);
+    console.log(data);
+    setsongToUser(data.songs);
   }
 
   async function Delete_a_song_from_the_list(song_id) {
@@ -98,6 +98,25 @@ function Home({ User, setUser, userPassword, setUserPassword }) {
     const data = await res.data;
     setsongToUser(data[0]?.songs);
     setNewsong(newsong);
+  }
+  async function Delete_play_list() {
+    const playlistName = category;
+    console.log(category);
+    const res = await axios.put(
+      `http://localhost:3001/playlists/deleteplaylist`,
+
+      {
+        playlistName,
+      },
+      headers
+    );
+    const data = await res.data;
+    console.log(data);
+    const playlistnames = data.map((playlist) => playlist.PlaylistName);
+    console.log(playlistnames);
+    setCategory(playlistnames[0]);
+    setPlaylist(playlistnames);
+    setsongplaylist([]);
   }
 
   // const allsongs = () => {};
@@ -130,6 +149,7 @@ function Home({ User, setUser, userPassword, setUserPassword }) {
     <div>
       <SongContext.Provider
         value={{
+          allPlaylist: allPlaylist,
           setNewsong: setNewsong,
           add_song_to_playlist: add_song_to_playlist,
           playhttp: playhttp,
@@ -148,7 +168,7 @@ function Home({ User, setUser, userPassword, setUserPassword }) {
           search: search,
         }}
       >
-        <Sidebar />
+        <Sidebar Delete_play_list={Delete_play_list} />
         <Header />
 
         <div className="SelectCategory"></div>
@@ -172,6 +192,16 @@ function Home({ User, setUser, userPassword, setUserPassword }) {
 }
 
 export default Home;
+// async function add_song_to_playlist(song, playlistName) {
+//   const res = await axios.put(
+//     `http://localhost:3001/playlists`,
+//     { playlistName, song },
+//     headers
+//   );
+//   const data = await res.data;
+//   setsongToUser(data.songs);
+// }
+
 // <div className="Login">
 // {!User && (
 //   <Login
@@ -254,3 +284,21 @@ export default Home;
 //   const data = await res.json();
 //   setUserPassword("");
 // }
+// useEffect(() => {
+// const get_playlist = async (category) => {
+//   const res = await axios.get(
+//     `http://localhost:3001//playlist/${category}`,
+//     headers
+//   );
+//   const data = await res.data;
+//   setAllPlaylist(data);
+//   setPlaylist(data.map((playlist) => playlist.PlaylistName));
+//   setCategory(data[0]?.PlaylistName);
+//   setsongToUser(data[0]?.songs);
+// };
+// get_playlist(category);
+//   const playlistChosen = allPlaylist.filter(
+//     (playlist) => playlist.PlaylistName === category
+//   );
+//   setsongToUser(playlistChosen[0]?.songs);
+// }, [category]);

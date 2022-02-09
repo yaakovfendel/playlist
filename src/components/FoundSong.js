@@ -81,7 +81,7 @@ export default function FoundSong({ song, setnewSong }) {
       {User ? (
         <button
           onClick={() => {
-            add_song_to_playlist(song, songplaylist);
+            add_song_to_playlist(song);
             playhttp(song.url);
           }}
         >

@@ -7,11 +7,11 @@ import LibraryMusicIcon from "@mui/icons-material/LibraryMusic";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
 import SongContext from "../Context/SongContext";
-import { Link } from "react-router-dom";
 import CustomizedSelects from "./CustomizedSelects";
-import SelectCategory from "./SelectCategory";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { Link } from "react-router-dom";
 
-function Sidebar({ setNewsong }) {
+function Sidebar({ setNewsong, Delete_play_list }) {
   const onFormSubmit = async (event) => {
     event.preventDefault();
     const playlistName = event.currentTarget[0].value;
@@ -21,20 +21,17 @@ function Sidebar({ setNewsong }) {
   };
 
   const onSearchSubmit = async (event) => {
-    setNewsong(true);
     event.preventDefault();
     const searchfor = event.currentTarget[0].value;
     search(searchfor);
-    // const res = await api.post("playlists/new", { name: playlistName });
-    // setPlaylists((playlists) => [...playlists, res.body]);
   };
 
   const { User } = useContext(SongContext);
   const { logout } = useContext(SongContext);
+
   const { add_playlist_to_mongo } = useContext(SongContext);
   const { search } = useContext(SongContext);
   const [dropdown, setDropdown] = useState(false);
-  const [dropdown2, setDropdown2] = useState(false);
   return (
     <div className="sidebar">
       <div className="logo">
@@ -85,29 +82,21 @@ function Sidebar({ setNewsong }) {
           type="text"
         />
       </form>
-
-      <br />
-      <strong className="sidebar__title">ADD SONG</strong>
-      <br />
-      <button onClick={() => setDropdown2(!dropdown2)}>
-        <SidebarOption Icon={LibraryMusicIcon} option="ADD SONG" />
-      </button>
+      {User && (
+        <button className="button delete" onClick={() => Delete_play_list()}>
+          <SidebarOption Icon={DeleteIcon} option="DELETE PLAY LIST" />
+        </button>
+      )}
       <hr />
-      {dropdown2 && <SelectCategory />}
     </div>
   );
 }
 
 export default Sidebar;
-// {playlists?.map((playlist) => {
-//     console.log(playlist);
-//     return (
-//       <div className="sidebar__songs" key={playlist._id}>
-//         <SidebarOption option={playlist.name} />
-//         <RemoveIcon
-//           onClick={() => deletePlaylist(playlist._id)}
-//           className="add-btn"
-//         />
-//       </div>
-//     );
-//   })}
+
+// <strong className="sidebar__title">ADD SONG</strong>
+//       <br />
+//       <button onClick={() => setDropdown2(!dropdown2)}>
+//         <SidebarOption Icon={LibraryMusicIcon} option="ADD SONG" />
+//       </button>
+// {dropdown2 && <SelectCategory />}

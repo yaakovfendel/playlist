@@ -29,11 +29,9 @@ export default function SelectCategory() {
     return Playlist;
   });
   const handleChange = (event) => {
-    console.log(event);
     const {
       target: { value },
     } = event;
-    console.log(value);
     setsongplaylist(
       // On autofill we get a stringified value.
       typeof value === "string" ? value.split(",") : value

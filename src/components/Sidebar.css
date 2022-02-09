@@ -73,3 +73,6 @@
     background: none;
     border: none;
 }
+.delete{
+  color: red;
+}

@@ -56,7 +56,6 @@
   }
   #playVideo {
     cursor: pointer;
-    /* background-color: rgba(255, 255, 255, 0); */
     border: none;
   }
   
@@ -64,8 +63,9 @@
       background: none;
       border: none;
   }
+
   .delete{
-    color:red;  
+    color:#fff;  
   }
   .title{
       padding-left: 30px;

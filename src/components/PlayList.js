@@ -7,7 +7,6 @@ export default function PlayList({
   songToUser,
   Delete_a_song_from_the_list,
 }) {
-  console.log(songToUser);
   return (
     <div>
       <div className="playlistsongs">
