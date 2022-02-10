@@ -38,15 +38,13 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import IconButton from "@mui/material/IconButton";
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import Typography from "@mui/material/Typography";
 import SkipPreviousIcon from "@mui/icons-material/SkipPrevious";
-import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import SkipNextIcon from "@mui/icons-material/SkipNext";
 import SongContext from "../Context/SongContext";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
-// import { useContext, useState } from "react";
-// import "./FoundSong.css";
-// import SelectCategory from "./SelectCategory";
+import AddBoxIcon from "@mui/icons-material/AddBox";
 
 export default function FoundSong({ song, setnewSong }) {
   const { Add_a_song_to_the_list } = React.useContext(SongContext);
@@ -78,28 +76,35 @@ export default function FoundSong({ song, setnewSong }) {
           </Typography>
         </CardContent>
       </Box>
-      {User ? (
-        <button
-          onClick={() => {
-            add_song_to_playlist(song);
-            playhttp(song.url);
-          }}
-        >
-          <CardMedia
-            component="img"
-            sx={{ width: 80 }}
-            image={song.thumbnails[0].url}
-            alt="Live from space album cover"
-          />
-        </button>
-      ) : (
-        <CardMedia
-          component="img"
-          sx={{ width: 80 }}
-          image={song.thumbnails[0].url}
-          alt="Live from space album cover"
-        />
-      )}
+
+      <Box sx={{ display: "flex", flexDirection: "column" }}>
+        <CardContent sx={{ flex: "1 0 auto" }}>
+          <Typography component="div" variant="h7">
+            {User ? (
+              <button
+                onClick={() => {
+                  add_song_to_playlist(song);
+                  playhttp(song.url);
+                }}
+              >
+                <CardMedia
+                  component="img"
+                  sx={{ width: 80 }}
+                  image={song.thumbnails[0].url}
+                  alt="Live from space album cover"
+                />
+              </button>
+            ) : (
+              <CardMedia
+                component="img"
+                sx={{ width: 80 }}
+                image={song.thumbnails[0].url}
+                alt="Live from space album cover"
+              />
+            )}
+          </Typography>
+        </CardContent>
+      </Box>
     </Card>
   );
 }

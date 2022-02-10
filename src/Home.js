@@ -48,11 +48,17 @@ function Home({ User, setUser, userPassword, setUserPassword }) {
         headers
       );
       const data = await res.data;
-      setAllPlaylist(data);
-      const playlistChosen = allPlaylist.filter(
-        (playlist) => playlist.PlaylistName === category
-      );
-      setsongToUser(playlistChosen[0]?.songs);
+      if (category === "All songs") {
+        let All_songs = allPlaylist.map((playlist) => playlist.songs);
+        All_songs = Array.prototype.concat.apply([], All_songs);
+        setsongToUser(All_songs);
+      } else {
+        setAllPlaylist(data);
+        const playlistChosen = allPlaylist.filter(
+          (playlist) => playlist.PlaylistName === category
+        );
+        setsongToUser(playlistChosen[0]?.songs);
+      }
     };
     get_all_user_playlist();
   }, [category]);
@@ -80,7 +86,6 @@ function Home({ User, setUser, userPassword, setUserPassword }) {
 
     const data = await res.data;
     setCategory(category);
-    console.log(data);
     setsongToUser(data.songs);
   }
 

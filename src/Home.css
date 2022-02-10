@@ -6,14 +6,15 @@
 }
 
 body{
+  height: 100%;
   font-family:cursive;
   margin: 0;
   padding: 0;
-  background-color: beige;
-  /* background-image:  url("C:\Users\USER\.vscode\extensions\yaakovfull\playlist\src\images\2154868.jpg"); */
-  background-image:  url("C:\Users\USER\yaakovfull\projecs\playlist\src\images\2154868.jpg");
-  background-repeat: no-repeat; 
-  height: 100vh;   
+  background-image:  url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7yMQ8DTywoXw5C38LwmQd0XLOHXTn7Hja0A&usqp=CAU");
+   background-position: center;
+   background-repeat: no-repeat;
+   background-size: cover;
+  /* height: 100vh;    */
 }
 
 .App{
@@ -29,12 +30,64 @@ body{
 
 
 
-.btn{
+
+.form{
+  display: flex
+  
+}
+.AddItemForm{
+  position:absolute;
+  top:7%;
+  left:30%
+}
+
+
+.FindSongs{
+  position:absolute;
+  top:2%;
+  right: 82%;
+}
+.findsongs {
+  position: absolute;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  height: 90vh;
+}
+
+.PlayList{
+  position:absolute;
+  top:2%;
+  right: 68%;
+  height: 90vh;
+}
+.playlistsongs{
+  position:absolute;
+  overflow-x: hidden;
+}
+.ReactPlayer{
+  position:absolute;
+  top:2%;
+  right: 1%;
+width: 450px;
+}
+.plyr {
+
+  min-width:100%;
+ 
+}
+
+
+
+
+
+
+
+/* .btn{
   display: inline-block;
   background: rgb(228, 143, 143);
 color: rgb(255, 255, 255);
 border: none;
-/* padding: 10px 10px; */
+padding: 10px 10px;
 margin: 5px;
 border-radius: 15px;
 cursor: pointer;
@@ -48,53 +101,4 @@ font-size: 15px;
 
 .btn:active{
   transform: scale(0.98);
-}
-.form{
-  display: flex
-  
-}
-.AddItemForm{
-  position:absolute;
-  top:7%;
-  left:30%
-}
-.Login{
-  position:absolute;
-  display: flex;
-  top:8%;
-  left:2%;
-}
-
-.PlayList{
-  position:absolute;
-  top:23%;
-  left:6%;
-}
-.FindSongs{
-position:absolute;
-width: 500px;
-height: 50px;
-top:230px;
-left:970px;
-}
-.ReactPlayer{
-position:absolute;
-top:10%;
-left:30%;
-}
-
-.SelectCategory{
-background-color: darkseagreen;
-position:absolute;
-top:7%;
-left:70%;
-}
-
-
-
-
-
-
-
-
-
+} */

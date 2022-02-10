@@ -20,6 +20,7 @@ export default function PlayList({
               title={title}
               thumbnails={thumbnails}
               Delete_a_song_from_the_list={Delete_a_song_from_the_list}
+              duration={duration}
             />
           )
         )}

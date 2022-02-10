@@ -42,14 +42,10 @@ export default function CustomizedSelects() {
   const { setCategory } = React.useContext(SongContext);
   const { category } = React.useContext(SongContext);
   const { Playlist } = React.useContext(SongContext);
-  const { add_playlist_to_mongo } = React.useContext(SongContext);
   const handleChange = (event) => {
     setCategory(event.target.value);
   };
 
-  const val = React.useRef();
-  const [inputCategory, setInputCategory] = React.useState("");
-  console.log(Playlist);
   const names = Playlist?.map((Playlist) => {
     return Playlist;
   });
@@ -64,29 +60,14 @@ export default function CustomizedSelects() {
           value={category}
           onChange={handleChange}
           input={<BootstrapInput />}
+          defaultValue={category}
         >
           {names?.map((playlist) => {
             return <option value={playlist.PlaylistName}>{playlist}</option>;
           })}
+          <option value="All songs">All songs</option>
         </NativeSelect>
       </FormControl>
     </div>
   );
 }
-
-// <FormControl sx={{ m: 1 }} variant="standard">
-//   <input
-//     ref={val}
-//     type="text"
-//     className="form-control "
-//     placeholder="add playlist name"
-//     value={inputCategory}
-//     onChange={(e) => setInputCategory(e.target.value)}
-//   />
-//   <button
-//     className="btn"
-//     onClick={() => add_playlist_to_mongo(val.current.value)}
-//   >
-//     add playlist name
-//   </button>
-// </FormControl>

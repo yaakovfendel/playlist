@@ -37,7 +37,8 @@ function Sidebar({ setNewsong, Delete_play_list }) {
       <div className="logo">
         <img
           className="sidebar__logo"
-          src="https://i.pinimg.com/originals/f0/5c/bc/f05cbc8c0f8b075d2b4f1f68fee49649.jpg"
+          // src="https://i.pinimg.com/originals/f0/5c/bc/f05cbc8c0f8b075d2b4f1f68fee49649.jpg"
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQI3R6bkSrom9U7IqQdhZlQoR9OgqesLuQzsg&usqp=CAU"
           alt=""
         />
         <h2>Play-List</h2>

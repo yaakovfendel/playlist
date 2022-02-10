@@ -1,27 +1,29 @@
 
   
-  .findsongs {
-    position: absolute;
-    right: 737px;
-    top: 34px;
-    height: 456px;
-    width: 468px;
-    overflow-x: hidden;
-    overflow-y: scroll;
-  }
+ 
+  .css-46bh2p-MuiCardContent-root {
+    padding: 0px;
+    align-items:center
+}
+.css-1t6e9jv-MuiCardActions-root {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 42px;
+  padding: 0px;
+}
   .css-10ve7wr{
     position: relative;
 
   }
 
   
-  .css-1oqv2c0-MuiPaper-root-MuiCard-root{
-    border-radius: 12px;
-    width: 454px;
-    height: 50px;
-    margin: 2px;
-   
-  }
+  
 
   .findsongs::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);

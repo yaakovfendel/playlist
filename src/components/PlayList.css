@@ -1,18 +1,7 @@
 
-.playlistsongs{
-  position: absolute;
-  left: 900px;
-  top: -65px;
-  height: 542px;
-  width: 467px;
-  overflow-x: hidden;
-}
-.css-1qaznj3-MuiCardContent-root {
-  padding: -2px;
-  -webkit-flex: 1 0 auto;
-  -ms-flex: 1 0 auto;
-  flex: 1 0 auto;
-}
+
+
+
   .playlistsongs::-webkit-scrollbar {
     width: 9px;
   }
@@ -27,3 +16,28 @@
       color-stop(0.6, #c04912)
     );
   }
+  .css-i4bv87-MuiSvgIcon-root{
+    cursor: pointer;
+    
+  }
+  .css-1bfp59o-MuiCardMedia-root{
+    cursor: pointer;
+
+  }
+  .css-1qaznj3-MuiCardContent-root {
+    padding: 0px;
+    -webkit-flex: 1 0 auto;
+    -ms-flex: 1 0 auto;
+    flex: 1 0 auto;
+}
+.css-37jdci-MuiTypography-root {
+  margin: -17px;
+}
+
+.css-1oqv2c0-MuiPaper-root-MuiCard-root{
+  border-radius: 12px;
+  width: 567px;
+  height: 60px;
+  margin: 3px;
+
+}

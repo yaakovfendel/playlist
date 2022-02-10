@@ -76,3 +76,23 @@
 .delete{
   color: red;
 }
+
+.css-1lbhtjm-MuiFormControl-root {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  position: relative;
+  width: 222px;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background-color:azure;
+  border-radius: 2%;
+  vertical-align: top;
+  margin: 1.6px;
+}
+
