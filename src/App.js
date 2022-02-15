@@ -2,8 +2,10 @@ import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/Signup";
+import Employe from "./components/Employe";
 
 import Home from "./Home";
+
 export default function App() {
   const [User, setUser] = useState(null);
   const [userPassword, setUserPassword] = useState([]);
@@ -48,6 +50,7 @@ export default function App() {
               />
             }
           ></Route>
+          <Route exact path="/Employe" element={<Employe />}></Route>
         </Routes>
       </Router>
     </div>

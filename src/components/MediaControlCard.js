@@ -10,6 +10,7 @@ import SongContext from "../Context/SongContext";
 import DeleteIcon from "@mui/icons-material/Delete";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import NativeSelectDemo from "./NativeSelectDemo";
+import SelectCategory from "./SelectCategory";
 export default function MediaControlCard({
   id,
   url,
@@ -27,7 +28,7 @@ export default function MediaControlCard({
   console.log(allPlaylist);
 
   let arryplayList = [];
-  const songPlayList = allPlaylist.map((playlist) => {
+  const songPlayList = allPlaylist?.map((playlist) => {
     arryplayList = [];
     function playlisttoarry(playlist) {
       if (playlist.songs.find((song) => song._id === _id)) {
@@ -62,6 +63,7 @@ export default function MediaControlCard({
         <MoreVertIcon onClick={() => setFlag(!flag)}></MoreVertIcon>
         {flag && <NativeSelectDemo songPlayList={songPlayList} />}
       </Box>
+
       <Box sx={{ display: "flex", alignItems: "center", pl: 0.7, pb: 0.4 }}>
         <IconButton aria-label="play/pause">
           <PlayArrowIcon
@@ -70,6 +72,7 @@ export default function MediaControlCard({
           />
         </IconButton>
       </Box>
+
       <Box sx={{ display: "flex", flexDirection: "column" }}>
         <CardContent sx={{ flex: "1 0 auto" }}>
           <Typography component="div" variant="h7">

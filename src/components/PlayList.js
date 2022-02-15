@@ -9,7 +9,7 @@ export default function PlayList({
 }) {
   return (
     <div>
-      <div className="playlistsongs">
+      <div className="playlistsongs findsongs">
         {songToUser?.map(
           ({ _id, id, duration, thumbnails, title, type, url, views }, i) => (
             <MediaControlCard

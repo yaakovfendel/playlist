@@ -1,6 +1,6 @@
 import "./Home.css";
 import "plyr-react/dist/plyr.css";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Header from "./components/Header";
 import PlayList from "./components/PlayList";
 import FindSongs from "./components/FindSongs";
@@ -8,14 +8,18 @@ import SongContext from "./Context/SongContext";
 import Plyr from "plyr-react";
 import axios from "axios";
 import Sidebar from "./components/sidebar";
+import RecipeReviewCard from "./components/RecipeReviewCard";
 
 function Home({ User, setUser, userPassword, setUserPassword }) {
+  const [videoOptions, setVideoOptions] = useState({ autoplay: true });
+  const [showPlayer, setShowPlayer] = useState(false);
   const headers = {
     headers: {
       "content-type": "application/json",
       authorization: `bearer ${JSON.parse(localStorage.accessToken)}`,
     },
   };
+
   const [category, setCategory] = useState([]);
   const [Playlist, setPlaylist] = useState([]);
   const [allPlaylist, setAllPlaylist] = useState([]);
@@ -25,6 +29,12 @@ function Home({ User, setUser, userPassword, setUserPassword }) {
   const [http, setHttp] = useState("");
   const [videocall, setVideocall] = useState(null);
   const [songplaylist, setsongplaylist] = useState([]);
+  const [currentSongId, setCurrentSongId] = useState(null);
+
+  const playAllCondRef = useRef(false);
+  const currentSongIndexRef = useRef(null);
+  const plyrRef = useRef(null);
+  const plyrIoClassicRef = useRef(null);
 
   useEffect(() => {
     const get_all_user_playlist = async () => {
@@ -48,17 +58,18 @@ function Home({ User, setUser, userPassword, setUserPassword }) {
         headers
       );
       const data = await res.data;
+      setAllPlaylist(data);
       if (category === "All songs") {
         let All_songs = allPlaylist.map((playlist) => playlist.songs);
         All_songs = Array.prototype.concat.apply([], All_songs);
         setsongToUser(All_songs);
       } else {
-        setAllPlaylist(data);
         const playlistChosen = allPlaylist.filter(
           (playlist) => playlist.PlaylistName === category
         );
         setsongToUser(playlistChosen[0]?.songs);
       }
+      plyrRef.current(null);
     };
     get_all_user_playlist();
   }, [category]);
@@ -77,15 +88,14 @@ function Home({ User, setUser, userPassword, setUserPassword }) {
 
   async function add_song_to_playlist(song) {
     const playlistName = category;
-    console.log(playlistName);
     const res = await axios.put(
       `http://localhost:3001/playlists`,
       { playlistName, song },
       headers
     );
-
     const data = await res.data;
-    setCategory(category);
+    setCategory(data.PlaylistName);
+    console.log(data);
     setsongToUser(data.songs);
   }
 
@@ -103,6 +113,7 @@ function Home({ User, setUser, userPassword, setUserPassword }) {
     const data = await res.data;
     setsongToUser(data[0]?.songs);
     setNewsong(newsong);
+    setShowPlayer(false);
   }
   async function Delete_play_list() {
     const playlistName = category;
@@ -122,12 +133,14 @@ function Home({ User, setUser, userPassword, setUserPassword }) {
     setCategory(playlistnames[0]);
     setPlaylist(playlistnames);
     setsongplaylist([]);
+    setShowPlayer(false);
   }
 
   // const allsongs = () => {};
   // const mysongs = () => {};
 
   const playhttp = (id) => {
+    setCurrentSongId(id);
     setHttp({
       type: "video",
       sources: [
@@ -137,14 +150,52 @@ function Home({ User, setUser, userPassword, setUserPassword }) {
         },
       ],
     });
+    setShowPlayer(true);
+  };
+  const stopSong = () => {
+    setCurrentSongId(null);
+    setHttp({});
+    setShowPlayer(false);
+  };
+
+  const playAllsongs = () => {
+    playAllCondRef.current = true;
+    console.log("%%%%%%%%%%%%");
+    console.log(songToUser);
+    const songsSources = songToUser.map((song) => {
+      return song.id;
+    });
+    setCurrentSongId(songToUser[0].id);
+    playhttp(...songsSources);
+    currentSongIndexRef.current = 0;
+  };
+
+  const getNextSongId = () => {
+    if (
+      songToUser.length <= currentSongIndexRef.current - 2 ||
+      currentSongIndexRef.current < 0
+    ) {
+      playAllCondRef.current = false;
+      console.log("no next song");
+      return;
+    }
+    currentSongIndexRef.current++;
+    return songToUser[currentSongIndexRef.current].id;
+  };
+  const playNextSong = () => {
+    const nextSongId = getNextSongId();
+    nextSongId && playhttp(nextSongId);
   };
 
   const logout = () => {
+    setShowPlayer(false);
+
     localStorage.accessToken = null;
     setUser(false);
   };
 
   const search = async (search) => {
+    stopSong();
     const res = await fetch(`http://localhost:3001/api/search/${search}`);
     const data = await res.json();
     setsongFind(data);
@@ -171,13 +222,15 @@ function Home({ User, setUser, userPassword, setUserPassword }) {
           setsongToUser: setsongToUser,
           logout: logout,
           search: search,
+          stopSong: stopSong,
         }}
       >
-        <Sidebar Delete_play_list={Delete_play_list} />
+        <Sidebar
+          Delete_play_list={Delete_play_list}
+          playAllsongs={playAllsongs}
+        />
         <Header />
 
-        <div className="SelectCategory"></div>
-        <div className="form"></div>
         <div className="PlayList">
           <PlayList
             playhttp={playhttp}
@@ -185,11 +238,31 @@ function Home({ User, setUser, userPassword, setUserPassword }) {
             Delete_a_song_from_the_list={Delete_a_song_from_the_list}
           />
         </div>
+
+        <div className="RecipeReviewCard">
+          {allPlaylist?.map((playlist) => (
+            <RecipeReviewCard playlist={playlist} />
+          ))}
+        </div>
         <div className="FindSongs">
           <FindSongs songFind={songFind} />
         </div>
         <div className="ReactPlayer">
-          <Plyr source={http} />
+          <Plyr
+            ref={(el) => {
+              if (el?.plyr?.on) {
+                el.plyr.on("ended", () => {
+                  if (playAllCondRef.current) {
+                    playNextSong();
+                  }
+                });
+              }
+              plyrRef.current = el;
+            }}
+            source={http}
+            options={videoOptions}
+            hidden={showPlayer}
+          />
         </div>
       </SongContext.Provider>
     </div>
@@ -197,113 +270,3 @@ function Home({ User, setUser, userPassword, setUserPassword }) {
 }
 
 export default Home;
-// async function add_song_to_playlist(song, playlistName) {
-//   const res = await axios.put(
-//     `http://localhost:3001/playlists`,
-//     { playlistName, song },
-//     headers
-//   );
-//   const data = await res.data;
-//   setsongToUser(data.songs);
-// }
-
-// <div className="Login">
-// {!User && (
-//   <Login
-//     get_all_users_from_mongo={get_all_users_from_mongo}
-//     register={register}
-//     login={login}
-//     User={User}
-//     userPassword={userPassword}
-//     setUserPassword={setUserPassword}
-//   />
-// )}
-// </div>
-// <div className="Login">
-// {User && <Logged logout={logout} User={User} />}
-// </div>
-
-// <div className="AddItemForm">
-//   <AddItemForm
-//     mysongs={mysongs}
-//     allsongs={allsongs}
-//     search={search}
-//     setNewsong={setNewsong}
-//     newsong={newsong}
-//     filterPlaylist={filterPlaylist}
-//     Add_a_song_to_the_list={Add_a_song_to_the_list}
-//   />
-// </div>
-// function add_song_to_mongo(song) {
-//   fetch(`http://localhost:3001/songs/newsong`, {
-//     method: "POST",
-//     headers: {
-//       "content-type": "application/json",
-//       authorization: `bearer ${JSON.parse(localStorage.accessToken)}`,
-//     },
-//     body: JSON.stringify(song),
-//   }).then((res) =>
-//     res.json().then((data) => {
-//       if (data) {
-//       }
-//     })
-//   );
-// }
-// const register = (userName, userPassword) => {
-//   navigate("/");
-// };
-// const login = (userName, userPassword) => {
-//   navigate("/Signin");
-// };
-// const Add_a_song_to_the_list = (song, category) => {
-//   const fullsong = {
-//     id: song.id,
-//     duration: song.duration,
-//     thumbnails: song.thumbnails[0].url,
-//     title: song.title,
-//     type: song.type,
-//     url: song.url,
-//     views: song.views,
-//     category: category,
-//   };
-//   add_song_to_mongo(fullsong);
-// };
-
-// const filterPlaylist = (search) => {
-//   setNewsong(search);
-//   if (search) {
-//     // setsongToUser(
-//     //   songToUser.filter((v) =>
-//     //     v.title.toLocaleLowerCase().includes(search.toLocaleLowerCase())
-//     //   )
-//     // );
-//   } else {
-//     // setsongToUser(usersSongs);
-//   }
-// };
-
-// async function get_all_users_from_mongo() {
-//   const res = await fetch(`http://localhost:3001/users`, {
-//     method: "GET",
-//   });
-//   const data = await res.json();
-//   setUserPassword("");
-// }
-// useEffect(() => {
-// const get_playlist = async (category) => {
-//   const res = await axios.get(
-//     `http://localhost:3001//playlist/${category}`,
-//     headers
-//   );
-//   const data = await res.data;
-//   setAllPlaylist(data);
-//   setPlaylist(data.map((playlist) => playlist.PlaylistName));
-//   setCategory(data[0]?.PlaylistName);
-//   setsongToUser(data[0]?.songs);
-// };
-// get_playlist(category);
-//   const playlistChosen = allPlaylist.filter(
-//     (playlist) => playlist.PlaylistName === category
-//   );
-//   setsongToUser(playlistChosen[0]?.songs);
-// }, [category]);

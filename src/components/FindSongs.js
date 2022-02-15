@@ -8,7 +8,7 @@ export default function FindSongs({ songFind }) {
 
   return (
     <div>
-      <div className="findsongs">
+      <div className="findsongs findsongs1">
         {songFind.map(
           (song, index) =>
             song.type === "video" && (

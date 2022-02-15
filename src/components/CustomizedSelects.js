@@ -45,10 +45,10 @@ export default function CustomizedSelects() {
   const handleChange = (event) => {
     setCategory(event.target.value);
   };
-
   const names = Playlist?.map((Playlist) => {
     return Playlist;
   });
+  console.log(names);
   return (
     <div>
       <FormControl sx={{ m: 0.2 }} variant="standard">

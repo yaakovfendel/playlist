@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const { Song } = require("./Song.js");
 const { User } = require("./User.js");
+const { Employee } = require("./Employee.js");
+const { Shifts } = require("./Shifts");
 
 const connectDB = async () => {
   const mongoUrl = process.env.MONGO_URL;
@@ -9,5 +11,5 @@ const connectDB = async () => {
     useUnifiedTopology: true,
   });
 };
-const models = { Song, User };
+const models = { Song, User, Employee, Shifts };
 module.exports = { connectDB, models };

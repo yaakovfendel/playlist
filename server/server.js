@@ -10,8 +10,8 @@ const {
   songsRoute,
   usersRoute,
   apiRoute,
-  categoriesRoute,
   playlistsRoute,
+  emploeyRoute,
 } = require("./routes/router.js");
 
 //Uses
@@ -21,11 +21,11 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 //Use routes
-app.use("/categories", categoriesRoute);
 app.use("/songs", songsRoute);
 app.use("/users", usersRoute);
 app.use("/playlists", authJWT, playlistsRoute);
 app.use("/api", apiRoute);
+app.use("/emploey", emploeyRoute);
 
 //Connect the Database
 connectDB().then(() => {

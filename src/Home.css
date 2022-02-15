@@ -1,9 +1,4 @@
-*{
-  /* box-sizing: border-box; */
-  /* margin: 0;
-  padding: 0; */
 
-}
 
 body{
   height: 100%;
@@ -44,21 +39,43 @@ body{
 
 .FindSongs{
   position:absolute;
-  top:2%;
-  right: 82%;
+  top:50%;
+  right: 81.5%;
 }
 .findsongs {
   position: absolute;
   overflow-x: hidden;
   overflow-y: scroll;
-  height: 90vh;
+  height: 40vh;
+}
+.findsongs1 {
+  position: absolute;
+  width: 350px;
+}
+.css-1ri6ub7-MuiPaper-root-MuiCard-root {
+   margin:7px
 }
 
+.RecipeReviewCard{
+  position: absolute;
+  display: flex;
+  top:1%;
+  right: 37%;
+  width: 100%;
+  max-width: 690px;
+  overflow: hidden;
+  overflow-x:scroll;
+  text-align: right;
+}
+.RecipeReviewCard::-webkit-scrollbar{
+  display: none;
+  
+}
 .PlayList{
   position:absolute;
-  top:2%;
-  right: 68%;
-  height: 90vh;
+  top:50%;
+  right: 57%;
+  height: 50vh;
 }
 .playlistsongs{
   position:absolute;
@@ -68,7 +85,7 @@ body{
   position:absolute;
   top:2%;
   right: 1%;
-width: 450px;
+width: 550px;
 }
 .plyr {
 
@@ -77,28 +94,3 @@ width: 450px;
 }
 
 
-
-
-
-
-
-/* .btn{
-  display: inline-block;
-  background: rgb(228, 143, 143);
-color: rgb(255, 255, 255);
-border: none;
-padding: 10px 10px;
-margin: 5px;
-border-radius: 15px;
-cursor: pointer;
-text-decoration: none;
-font-size: 15px;
-}
-
-.btn:focus{
-  outline: none;
-}
-
-.btn:active{
-  transform: scale(0.98);
-} */

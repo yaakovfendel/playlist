@@ -10,14 +10,13 @@ import SongContext from "../Context/SongContext";
 import CustomizedSelects from "./CustomizedSelects";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Link } from "react-router-dom";
+import { Button } from "@mui/material";
 
-function Sidebar({ setNewsong, Delete_play_list }) {
+function Sidebar({ playAllsongs, Delete_play_list }) {
   const onFormSubmit = async (event) => {
     event.preventDefault();
     const playlistName = event.currentTarget[0].value;
     add_playlist_to_mongo(playlistName);
-    // const res = await api.post("playlists/new", { name: playlistName });
-    // setPlaylists((playlists) => [...playlists, res.body]);
   };
 
   const onSearchSubmit = async (event) => {
@@ -37,7 +36,6 @@ function Sidebar({ setNewsong, Delete_play_list }) {
       <div className="logo">
         <img
           className="sidebar__logo"
-          // src="https://i.pinimg.com/originals/f0/5c/bc/f05cbc8c0f8b075d2b4f1f68fee49649.jpg"
           src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQI3R6bkSrom9U7IqQdhZlQoR9OgqesLuQzsg&usqp=CAU"
           alt=""
         />
@@ -62,7 +60,11 @@ function Sidebar({ setNewsong, Delete_play_list }) {
           <SidebarOption Icon={LogoutIcon} option="log out" />
         </button>
       )}
-      <SidebarOption Icon={HomeIcon} option="Home" />
+      <button>
+        <Link to={"/Home"}>
+          <SidebarOption Icon={HomeIcon} option="Home" />
+        </Link>
+      </button>
       <SidebarOption Icon={SearchIcon} option="Search" />
       <hr />
       <form onSubmit={(e) => onSearchSubmit(e)}>
@@ -73,7 +75,15 @@ function Sidebar({ setNewsong, Delete_play_list }) {
         <SidebarOption Icon={LibraryMusicIcon} option="Your Library" />
       </button>
       {dropdown && <CustomizedSelects />}
-      <br />
+
+      <button
+        onClick={() => {
+          playAllsongs();
+        }}
+      >
+        <br />
+        <SidebarOption Icon={LibraryMusicIcon} option="play all" />
+      </button>
       <strong className="sidebar__title">PLAY LISTS</strong>
       <hr />
       <form onSubmit={(e) => onFormSubmit(e)}>
@@ -89,15 +99,13 @@ function Sidebar({ setNewsong, Delete_play_list }) {
         </button>
       )}
       <hr />
+      <button>
+        <Link to={`/Employe`}>
+          <SidebarOption Icon={LoginIcon} option="Employe" />
+        </Link>
+      </button>
     </div>
   );
 }
 
 export default Sidebar;
-
-// <strong className="sidebar__title">ADD SONG</strong>
-//       <br />
-//       <button onClick={() => setDropdown2(!dropdown2)}>
-//         <SidebarOption Icon={LibraryMusicIcon} option="ADD SONG" />
-//       </button>
-// {dropdown2 && <SelectCategory />}
