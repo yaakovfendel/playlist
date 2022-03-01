@@ -1,3 +1,7 @@
 .env
 node_modules
 secret.js
+
+#aws key
+yaakovfendel-key.pem
+

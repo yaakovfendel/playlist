@@ -8,13 +8,15 @@ router.post("/register", async (req, res) => {
   const username = req.body[0];
   const password = req.body[1];
   console.log(username, password);
+
   try {
-    const hashedPassword = await bcrypt.hash(password, 10);
     const userAlreadyExicst = await User.findOne({ username: username });
     if (userAlreadyExicst)
       return res
         .status(401)
         .send(`alredy Exisct`, console.log("alredy Exisct"));
+
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     const user = new User({
       username: username,
@@ -49,7 +51,14 @@ router.post("/login", async (req, res) => {
       const accessToken = jwt.sign(
         JSON.stringify(user),
         process.env.TOKEN_SECRET
+        // { expiresIn: "20s" }
       );
+      // const accessToken = jwt.sign(
+      //   JSON.stringify(user),
+      //   process.env.TOKEN_SECRET,
+      //   { expiresIn: "20m" }
+      // );
+
       res.json({ accessToken });
     } else {
       res.status(400).json({ message: "Invalid password" });

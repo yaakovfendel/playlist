@@ -8,12 +8,14 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import "./Sidebaremployes.css";
 export default function BasicTable2({ totalTime }) {
-  console.log(totalTime);
   const firstName = totalTime[0]?.firstName;
   const lastName = totalTime[0]?.lastName;
   const id = totalTime[0]?.id;
-  const totalTimeWork = totalTime[1];
-  const totalSalary = totalTime[2];
+
+  const totalTimeWork = totalTime[1].toFixed(4);
+  console.log(totalTimeWork);
+  const totalSalary = totalTime[2].toFixed(4);
+  console.log(totalSalary);
   function createData(id, firstName, lastName, totalTimeWork, totalSalary) {
     return { id, firstName, lastName, totalTimeWork, totalSalary };
   }

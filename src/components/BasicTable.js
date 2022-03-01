@@ -10,17 +10,17 @@ export default function DataTable({ shifts }) {
     {
       field: "start",
       headerName: "Start",
-      width: 120,
+      width: 184,
     },
     {
       field: "exit",
       headerName: "Exit",
-      width: 120,
+      width: 184,
     },
     {
       field: "hours",
       headerName: "Hours",
-      width: 120,
+      width: 130,
     },
     {
       field: "salary",
@@ -46,10 +46,10 @@ export default function DataTable({ shifts }) {
       id_employee: id,
       lastName: lastName,
       firstName: firstName,
-      start: shift.start,
-      exit: shift.exit,
-      hours: shift.hours,
-      salary: shift.salary,
+      start: new Date(shift.start),
+      exit: new Date(shift.exit),
+      hours: shift.hours.toFixed(4),
+      salary: shift.salary.toFixed(4),
     };
   });
 
