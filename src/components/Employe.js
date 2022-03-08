@@ -42,7 +42,7 @@ export default function Employe() {
       const time = new Date().getTime();
       const action = e;
       const res = await axios.post(
-        `${BASE_URL}emploey/panchtime/${full_detailes.id}/${action}/${time}`,
+        `https://playlist-yaakov.herokuapp.com/emploey/panchtime/${full_detailes.id}/${action}/${time}`,
         full_detailes,
         headers
       );
@@ -56,7 +56,7 @@ export default function Employe() {
   const get_shifts_by_id = async (e) => {
     if (full_detailes.id) {
       const res = await axios.get(
-        `${BASE_URL}emploey/panchtime/${full_detailes.id}`,
+        `https://playlist-yaakov.herokuapp.com/emploey/panchtime/${full_detailes.id}`,
 
         headers
       );
@@ -68,7 +68,7 @@ export default function Employe() {
   const shiptstime = async (e) => {
     if (full_detailes.id) {
       const res = await axios.get(
-        `${BASE_URL}emploey/shiptstime/${full_detailes.id}`,
+        `https://playlist-yaakov.herokuapp.com/emploey/shiptstime/${full_detailes.id}`,
 
         headers
       );
@@ -80,7 +80,7 @@ export default function Employe() {
   const shiptsmoney = async (e) => {
     if (full_detailes.id) {
       const res = await axios.get(
-        `${BASE_URL}emploey/shiptsmoney/${full_detailes.id}`,
+        `https://playlist-yaakov.herokuapp.com/emploey/shiptsmoney/${full_detailes.id}`,
 
         headers
       );
@@ -92,13 +92,16 @@ export default function Employe() {
 
   function delete_() {
     if (full_detailes.id) {
-      fetch(`${BASE_URL}emploey/delete/${full_detailes.id}`, {
-        method: "DELETE",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify([full_detailes.id]),
-      })
+      fetch(
+        `$https://playlist-yaakov.herokuapp.com/emploey/delete/${full_detailes.id}`,
+        {
+          method: "DELETE",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify([full_detailes.id]),
+        }
+      )
         .then((res) => res.json())
         .then((res) => console.log(res));
       setFlag("false");

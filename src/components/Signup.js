@@ -62,7 +62,7 @@ export default function SignUp({
   const navigate = useNavigate();
   const register = ({ email, password, firstname, lastname }) => {
     console.log(email, password, firstname, lastname);
-    fetch(`http://localhost:3001/users/register`, {
+    fetch(`https://playlist-yaakov.herokuapp.com/users/register`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

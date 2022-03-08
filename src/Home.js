@@ -40,7 +40,7 @@ function Home({ User, setUser, userPassword, setUserPassword }) {
   useEffect(() => {
     const get_all_user_playlist = async () => {
       const res = await axios.get(
-        `http://localhost:3001/playlists/userPlaylists`,
+        `https://playlist-yaakov.herokuapp.com/playlists/userPlaylists`,
         headers
       );
       const data = await res.data;
@@ -55,7 +55,7 @@ function Home({ User, setUser, userPassword, setUserPassword }) {
   useEffect(() => {
     const get_all_user_playlist = async () => {
       const res = await axios.get(
-        `http://localhost:3001/playlists/userPlaylists`,
+        `https://playlist-yaakov.herokuapp.com/playlists/userPlaylists`,
         headers
       );
       const data = await res.data;
@@ -70,14 +70,18 @@ function Home({ User, setUser, userPassword, setUserPassword }) {
         );
         setsongToUser(playlistChosen[0]?.songs);
       }
-      plyrRef.current(null);
+      // plyrRef.current(null);
     };
     get_all_user_playlist();
   }, [category]);
 
   async function add_playlist_to_mongo(playlist) {
     const playlistName = { playlistName: playlist };
-    const res = await axios.post(`${BASE_URL}playlists`, playlistName, headers);
+    const res = await axios.post(
+      `https://playlist-yaakov.herokuapp.com/playlists`,
+      playlistName,
+      headers
+    );
     const data = await res.data;
     const playlistnames = data.map((playlist) => playlist.PlaylistName);
     setPlaylist(playlistnames);
@@ -86,7 +90,7 @@ function Home({ User, setUser, userPassword, setUserPassword }) {
   async function add_song_to_playlist(song) {
     const playlistName = category;
     const res = await axios.put(
-      `http://localhost:3001/playlists`,
+      `https://playlist-yaakov.herokuapp.com/playlists`,
       { playlistName, song },
       headers
     );
@@ -99,7 +103,7 @@ function Home({ User, setUser, userPassword, setUserPassword }) {
   async function Delete_a_song_from_the_list(song_id) {
     const playlistName = category;
     const res = await axios.put(
-      `http://localhost:3001/playlists/delete`,
+      `https://playlist-yaakov.herokuapp.com/playlists/delete`,
 
       {
         playlistName,
@@ -116,7 +120,7 @@ function Home({ User, setUser, userPassword, setUserPassword }) {
     const playlistName = category;
     console.log(category);
     const res = await axios.put(
-      `http://localhost:3001/playlists/deleteplaylist`,
+      `https://playlist-yaakov.herokuapp.com/playlists/deleteplaylist`,
 
       {
         playlistName,
@@ -186,8 +190,10 @@ function Home({ User, setUser, userPassword, setUserPassword }) {
   };
 
   const search = async (search) => {
-    stopSong();
-    const res = await fetch(`http://localhost:3001/search/${search}`);
+    // stopSong();
+    const res = await fetch(
+      `https://playlist-yaakov.herokuapp.com/api/search/${search}`
+    );
     const data = await res.json();
     setsongFind(data);
   };

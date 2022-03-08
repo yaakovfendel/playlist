@@ -51,7 +51,7 @@ export default function SignIn({
   const navigate = useNavigate();
 
   const login = ({ password, firstname }) => {
-    fetch(`http://localhost:3001/users/login`, {
+    fetch(`https://playlist-yaakov.herokuapp.com/users/login`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
