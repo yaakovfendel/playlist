@@ -9,6 +9,7 @@ import Plyr from "plyr-react";
 import axios from "axios";
 import Sidebar from "./components/sidebar";
 import RecipeReviewCard from "./components/RecipeReviewCard";
+import BASE_URL from "./jeneral";
 
 function Home({ User, setUser, userPassword, setUserPassword }) {
   const [videoOptions, setVideoOptions] = useState({ autoplay: true });
@@ -76,11 +77,7 @@ function Home({ User, setUser, userPassword, setUserPassword }) {
 
   async function add_playlist_to_mongo(playlist) {
     const playlistName = { playlistName: playlist };
-    const res = await axios.post(
-      "http://localhost:3001/playlists",
-      playlistName,
-      headers
-    );
+    const res = await axios.post(`${BASE_URL}playlists`, playlistName, headers);
     const data = await res.data;
     const playlistnames = data.map((playlist) => playlist.PlaylistName);
     setPlaylist(playlistnames);
@@ -135,10 +132,6 @@ function Home({ User, setUser, userPassword, setUserPassword }) {
     setsongplaylist([]);
     setShowPlayer(false);
   }
-
-  // const allsongs = () => {};
-  // const mysongs = () => {};
-
   const playhttp = (id) => {
     setCurrentSongId(id);
     setHttp({
@@ -160,8 +153,6 @@ function Home({ User, setUser, userPassword, setUserPassword }) {
 
   const playAllsongs = () => {
     playAllCondRef.current = true;
-    console.log("%%%%%%%%%%%%");
-    console.log(songToUser);
     const songsSources = songToUser.map((song) => {
       return song.id;
     });
@@ -196,7 +187,7 @@ function Home({ User, setUser, userPassword, setUserPassword }) {
 
   const search = async (search) => {
     stopSong();
-    const res = await fetch(`http://localhost:3001/api/search/${search}`);
+    const res = await fetch(`http://localhost:3001/search/${search}`);
     const data = await res.json();
     setsongFind(data);
   };

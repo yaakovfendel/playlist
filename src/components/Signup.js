@@ -17,6 +17,7 @@ import Home from "../Home";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import "./Signup.css";
+import BASE_URL from "../jeneral";
 function Copyright(props) {
   return (
     <Typography
@@ -45,8 +46,6 @@ export default function SignUp({
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log(data);
-    // eslint-disable-next-line no-console
     register({
       email: data.get("email"),
       password: data.get("password"),
@@ -62,7 +61,6 @@ export default function SignUp({
   };
   const navigate = useNavigate();
   const register = ({ email, password, firstname, lastname }) => {
-    // console.log(userName, userPassword);
     console.log(email, password, firstname, lastname);
     fetch(`http://localhost:3001/users/register`, {
       method: "POST",
@@ -79,6 +77,7 @@ export default function SignUp({
           ? setUser([firstname, localStorage.accessToken])
           : setUser(false);
         if (localStorage.accessToken) {
+          console.log(localStorage.accessToken);
           navigate("/Home");
         }
       });

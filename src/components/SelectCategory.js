@@ -32,10 +32,7 @@ export default function SelectCategory() {
     const {
       target: { value },
     } = event;
-    setsongplaylist(
-      // On autofill we get a stringified value.
-      typeof value === "string" ? value.split(",") : value
-    );
+    setsongplaylist(typeof value === "string" ? value.split(",") : value);
   };
 
   return (

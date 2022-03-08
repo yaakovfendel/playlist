@@ -43,18 +43,9 @@ export default function SignIn({
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
     login({
-      // email: data.get("email"),
       password: data.get("password"),
       firstname: data.get("firstName"),
-      // lastname: data.get("lastName"),
-    });
-    console.log({
-      // email: data.get("email"),
-      password: data.get("password"),
-      firstname: data.get("firstName"),
-      // lastname: data.get("lastName"),
     });
   };
   const navigate = useNavigate();

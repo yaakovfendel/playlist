@@ -1,36 +1,3 @@
-// import { useContext, useState } from "react";
-// import SongContext from "../Context/SongContext";
-// import "./FoundSong.css";
-// import SelectCategory from "./SelectCategory";
-
-// export default function FoundSong({ song, setnewSong }) {
-//   const { Add_a_song_to_the_list } = useContext(SongContext);
-//   const { add_song_to_playlist } = useContext(SongContext);
-//   const { playhttp } = useContext(SongContext);
-//   const { User } = useContext(SongContext);
-//   const { setCategory } = useContext(SongContext);
-//   const { category } = useContext(SongContext);
-//   const { songplaylist } = useContext(SongContext);
-
-//   return (
-//     <div className="containerFoundSong">
-//       {User && (
-//         <button
-//           className="button "
-//           id="addVideofoundsong"
-//           onClick={() => {
-//             song.user = User;
-//             add_song_to_playlist(song, songplaylist);
-//             playhttp(song.url);
-//             setnewSong(true);
-//           }}
-//         >
-//           <img className="img " src={song.thumbnails[0].url} alt="" />;
-//         </button>
-//       )}
-//     </div>
-//   );
-// }
 import * as React from "react";
 import { useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -40,11 +7,7 @@ import CardMedia from "@mui/material/CardMedia";
 import IconButton from "@mui/material/IconButton";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import Typography from "@mui/material/Typography";
-import SkipPreviousIcon from "@mui/icons-material/SkipPrevious";
-import SkipNextIcon from "@mui/icons-material/SkipNext";
 import SongContext from "../Context/SongContext";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
-import AddBoxIcon from "@mui/icons-material/AddBox";
 
 export default function FoundSong({ song, setnewSong }) {
   const { Add_a_song_to_the_list } = React.useContext(SongContext);

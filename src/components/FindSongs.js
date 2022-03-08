@@ -1,8 +1,6 @@
 import { useState } from "react";
 import "./FindSongs.css";
-import FoundSong from "./FoundSong";
 import MediaCard from "./MediaCard";
-import SelectCategory from "./SelectCategory";
 export default function FindSongs({ songFind }) {
   const [newSong, setnewSong] = useState(false);
 
@@ -19,13 +17,3 @@ export default function FindSongs({ songFind }) {
     </div>
   );
 }
-// {songFind.map(
-//   (song, index) =>
-//     song.type === "video" && (
-//       <FoundSong key={song.items} song={song} setnewSong={setnewSong} />
-//     )
-// )}
-
-// {newSong && <SelectCategory></SelectCategory>}
-
-// <div id="titleList">list of songs</div>

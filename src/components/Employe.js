@@ -4,6 +4,7 @@ import axios from "axios";
 import BasicTable from "./BasicTable";
 import "./Employe.css";
 import BasicTable2 from "./BasicTable2";
+import BASE_URL from "../jeneral";
 
 export default function Employe() {
   const [full_detailes, setFull_detailes] = useState({
@@ -41,7 +42,7 @@ export default function Employe() {
       const time = new Date().getTime();
       const action = e;
       const res = await axios.post(
-        `http://localhost:3001/emploey/panchtime/${full_detailes.id}/${action}/${time}`,
+        `${BASE_URL}emploey/panchtime/${full_detailes.id}/${action}/${time}`,
         full_detailes,
         headers
       );
@@ -55,7 +56,7 @@ export default function Employe() {
   const get_shifts_by_id = async (e) => {
     if (full_detailes.id) {
       const res = await axios.get(
-        `http://localhost:3001/emploey/panchtime/${full_detailes.id}`,
+        `${BASE_URL}emploey/panchtime/${full_detailes.id}`,
 
         headers
       );
@@ -67,7 +68,7 @@ export default function Employe() {
   const shiptstime = async (e) => {
     if (full_detailes.id) {
       const res = await axios.get(
-        `http://localhost:3001/emploey/shiptstime/${full_detailes.id}`,
+        `${BASE_URL}emploey/shiptstime/${full_detailes.id}`,
 
         headers
       );
@@ -79,7 +80,7 @@ export default function Employe() {
   const shiptsmoney = async (e) => {
     if (full_detailes.id) {
       const res = await axios.get(
-        `http://localhost:3001/emploey/shiptsmoney/${full_detailes.id}`,
+        `${BASE_URL}emploey/shiptsmoney/${full_detailes.id}`,
 
         headers
       );
@@ -91,7 +92,7 @@ export default function Employe() {
 
   function delete_() {
     if (full_detailes.id) {
-      fetch(`http://localhost:3001/emploey/delete/${full_detailes.id}`, {
+      fetch(`${BASE_URL}emploey/delete/${full_detailes.id}`, {
         method: "DELETE",
         headers: {
           "content-type": "application/json",

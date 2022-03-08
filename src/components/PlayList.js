@@ -1,5 +1,4 @@
 import MediaControlCard from "./MediaControlCard";
-import Play from "./Play";
 import "./PlayList.css";
 
 export default function PlayList({
